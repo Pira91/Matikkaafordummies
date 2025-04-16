@@ -5,15 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ikamittarip.fi - Matemaattiset työkalut</title>
     <style>
+        /* Yleiset tyylit */
         body {
             font-family: 'Arial', sans-serif;
             line-height: 1.6;
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 20px;
             background-color: #f5f5f5;
             color: #333;
         }
+        
         header {
             background-color: #2c3e50;
             color: white;
@@ -22,9 +24,12 @@
             margin-bottom: 20px;
             text-align: center;
         }
-        h1 {
-            margin: 0;
+        
+        h1, h2, h3 {
+            color: #2c3e50;
         }
+        
+        /* Laskurien tyylit */
         .calculator {
             background-color: white;
             border-radius: 8px;
@@ -32,26 +37,48 @@
             margin-bottom: 20px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
+        
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
         input, select, button {
             padding: 10px;
-            margin: 5px;
+            margin: 5px 0;
             border: 1px solid #ddd;
             border-radius: 4px;
+            width: 100%;
+            max-width: 200px;
         }
+        
         button {
             background-color: #3498db;
             color: white;
             cursor: pointer;
             transition: background-color 0.3s;
+            font-weight: bold;
         }
+        
         button:hover {
             background-color: #2980b9;
         }
+        
         .result {
             font-weight: bold;
             color: #e74c3c;
             font-size: 1.2em;
         }
+        
+        /* Trigonometria-animaatio */
+        .unit-circle {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 10px auto;
+        }
+        
         footer {
             text-align: center;
             margin-top: 30px;
@@ -65,42 +92,70 @@
         <p>Matemaattiset työkalut ja ratkaisut</p>
     </header>
 
-    <div class="calculator">
-        <h2>Peruslaskin</h2>
-        <input type="number" id="num1" placeholder="Luku 1">
-        <select id="operator">
-            <option value="add">+</option>
-            <option value="subtract">-</option>
-            <option value="multiply">×</option>
-            <option value="divide">÷</option>
-        </select>
-        <input type="number" id="num2" placeholder="Luku 2">
-        <button onclick="calculate()">Laske</button>
-        <p>Tulos: <span class="result" id="basic-result">-</span></p>
-    </div>
+    <div class="calculator-grid">
+        <!-- PERUSLASKIN -->
+        <div class="calculator">
+            <h2>Peruslaskin</h2>
+            <input type="number" id="num1" placeholder="Luku 1">
+            <select id="operator">
+                <option value="add">+</option>
+                <option value="subtract">-</option>
+                <option value="multiply">×</option>
+                <option value="divide">÷</option>
+            </select>
+            <input type="number" id="num2" placeholder="Luku 2">
+            <button onclick="calculate()">Laske</button>
+            <p>Tulos: <span class="result" id="basic-result">-</span></p>
+        </div>
 
-    <div class="calculator">
-        <h2>Pythagoraan lause</h2>
-        <input type="number" id="a" placeholder="Kateetti a">
-        <input type="number" id="b" placeholder="Kateetti b">
-        <button onclick="pythagoras()">Laske hypotenuusa</button>
-        <p>Hypotenuusa: <span class="result" id="pythagoras-result">-</span></p>
-    </div>
+        <!-- PYTHAGORAS -->
+        <div class="calculator">
+            <h2>Pythagoraan lause</h2>
+            <input type="number" id="a" placeholder="Kateetti a">
+            <input type="number" id="b" placeholder="Kateetti b">
+            <button onclick="pythagoras()">Laske hypotenuusa</button>
+            <p>Hypotenuusa: <span class="result" id="pythagoras-result">-</span></p>
+        </div>
 
-    <div class="calculator">
-        <h2>BMI-Laskuri</h2>
-        <input type="number" id="weight" placeholder="Paino (kg)">
-        <input type="number" id="height" placeholder="Pituus (cm)">
-        <button onclick="calculateBMI()">Laske BMI</button>
-        <p>BMI: <span class="result" id="bmi-result">-</span></p>
+        <!-- BMI-LASKURI -->
+        <div class="calculator">
+            <h2>BMI-Laskuri</h2>
+            <input type="number" id="weight" placeholder="Paino (kg)">
+            <input type="number" id="height" placeholder="Pituus (cm)">
+            <button onclick="calculateBMI()">Laske BMI</button>
+            <p>BMI: <span class="result" id="bmi-result">-</span></p>
+        </div>
+
+        <!-- TRIGONOMETRIA -->
+        <div class="calculator">
+            <h2>Trigonometrian laskuri</h2>
+            <input type="number" id="trig-angle" placeholder="Kulma (asteet)" min="0" max="360" step="0.1">
+            <button onclick="calculateTrig()">Laske</button>
+            
+            <div style="margin-top: 15px;">
+                <p>sin(θ) = <span class="result" id="sin-result">-</span></p>
+                <p>cos(θ) = <span class="result" id="cos-result">-</span></p>
+                <p>tan(θ) = <span class="result" id="tan-result">-</span></p>
+            </div>
+            
+            <div class="unit-circle">
+                <svg width="150" height="150" viewBox="0 0 150 150">
+                    <circle cx="75" cy="75" r="70" fill="#f8f9fa" stroke="#2c3e50"/>
+                    <line x1="75" y1="75" x2="145" y2="75" stroke="#7f8c8d" stroke-width="1"/>
+                    <line x1="75" y1="75" x2="75" y2="5" stroke="#7f8c8d" stroke-width="1"/>
+                    <path id="trig-circle-line" d="M75 75 L75 75" stroke="#e74c3c" stroke-width="2"/>
+                    <circle id="trig-circle-point" cx="75" cy="75" r="3" fill="#e74c3c" opacity="0"/>
+                </svg>
+            </div>
+        </div>
     </div>
 
     <footer>
-        <p>© 2023 ikamittarip.fi - Kaikki laskut tarkistettava manuaalisesti</p>
+        <p>© <span id="current-year"></span> ikamittarip.fi - Kaikki laskut tarkistettava manuaalisesti</p>
     </footer>
 
     <script>
-        // Peruslaskin
+        // 1. PERUSLASKIN
         function calculate() {
             const num1 = parseFloat(document.getElementById('num1').value);
             const num2 = parseFloat(document.getElementById('num2').value);
@@ -118,7 +173,7 @@
             document.getElementById('basic-result').textContent = result;
         }
 
-        // Pythagoraan lause
+        // 2. PYTHAGORAAN LAUSE
         function pythagoras() {
             const a = parseFloat(document.getElementById('a').value);
             const b = parseFloat(document.getElementById('b').value);
@@ -126,32 +181,51 @@
             document.getElementById('pythagoras-result').textContent = c.toFixed(2);
         }
 
-        // BMI-laskuri
+        // 3. BMI-LASKURI
         function calculateBMI() {
             const weight = parseFloat(document.getElementById('weight').value);
-            const height = parseFloat(document.getElementById('height').value) / 100; // Muuntaa cm -> m
+            const height = parseFloat(document.getElementById('height').value) / 100;
             const bmi = weight / (height * height);
             document.getElementById('bmi-result').textContent = bmi.toFixed(1);
         }
+
+        // 4. TRIGONOMETRIA
+        function calculateTrig() {
+            const angleDeg = parseFloat(document.getElementById('trig-angle').value);
+            const angleRad = angleDeg * (Math.PI / 180);
+            
+            const sinValue = Math.sin(angleRad).toFixed(4);
+            const cosValue = Math.cos(angleRad).toFixed(4);
+            let tanValue = Math.tan(angleRad).toFixed(4);
+            
+            if (angleDeg % 90 === 0 && angleDeg % 180 !== 0) {
+                tanValue = "∞";
+            }
+            
+            document.getElementById('sin-result').textContent = sinValue;
+            document.getElementById('cos-result').textContent = cosValue;
+            document.getElementById('tan-result').textContent = tanValue;
+            updateUnitCircle(angleDeg);
+        }
+
+        function updateUnitCircle(angleDeg) {
+            const angleRad = angleDeg * (Math.PI / 180);
+            const centerX = 75;
+            const centerY = 75;
+            const radius = 70;
+            
+            const pointX = centerX + radius * Math.cos(angleRad);
+            const pointY = centerY - radius * Math.sin(angleRad);
+            
+            document.getElementById('trig-circle-line').setAttribute("d", 
+                `M${centerX} ${centerY} L${pointX} ${pointY}`);
+            document.getElementById('trig-circle-point').setAttribute("cx", pointX);
+            document.getElementById('trig-circle-point').setAttribute("cy", pointY);
+            document.getElementById('trig-circle-point').style.opacity = "1";
+        }
+
+        // Näytä nykyinen vuosi footterissa
+        document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
-<!-- Lisää tämä index.html-tiedostoosi -->
-<div class="calculator">
-    <h2>Neliöjuuri</h2>
-    <input type="number" id="sqrt-input" placeholder="Luku (≥ 0)">
-    <button onclick="calculateSqrt()">Laske</button>
-    <p>Tulos: <span class="result" id="sqrt-result">-</span></p>
-</div>
-
-<script>
-    // Lisää tämä script-osioon (mukaan lukien avaava ja sulkeva script-tagi, jos ei jo ole)
-    function calculateSqrt() {
-        const num = parseFloat(document.getElementById('sqrt-input').value);
-        if (num < 0) {
-            document.getElementById('sqrt-result').textContent = "Virhe: negatiivinen luku";
-        } else {
-            document.getElementById('sqrt-result').textContent = Math.sqrt(num).toFixed(2);
-        }
-    }
-</script>
