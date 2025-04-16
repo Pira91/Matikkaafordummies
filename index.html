@@ -118,44 +118,97 @@
 
 <!-- Laskurit ja työkalut -->
 <div class="container">
+    <!-- Yhteenlasku -->
+    <div class="calculator-box">
+        <h2>Yhteenlasku</h2>
+        <input type="number" id="sum1" placeholder="Luku 1">
+        <input type="number" id="sum2" placeholder="Luku 2">
+        <button onclick="calculateSum()">Laske</button>
+        <p id="sum-result">-</p>
+    </div>
+
+    <!-- Kertolaskutaulukko -->
+    <div class="calculator-box">
+        <h2>Kertolaskutaulukko</h2>
+        <input type="number" id="multiplication-input" placeholder="Luku">
+        <button onclick="generateMultiplicationTable()">Näytä taulukko</button>
+        <div id="multiplication-table"></div>
+    </div>
+
+    <!-- Potenssilaskin -->
+    <div class="calculator-box">
+        <h2>Potenssilaskin</h2>
+        <input type="number" id="base" placeholder="Perusluku">
+        <input type="number" id="exponent" placeholder="Eksponentti">
+        <button onclick="calculatePower()">Laske</button>
+        <p id="power-result">-</p>
+    </div>
+
+    <!-- Neliöjuuri ja kuutiojuuri -->
+    <div class="calculator-box">
+        <h2>Neliöjuuri ja kuutiojuuri</h2>
+        <input type="number" id="square-root" placeholder="Luku">
+        <button onclick="calculateRoots()">Laske juuret</button>
+        <p id="root-result">-</p>
+    </div>
+
+    <!-- Pinta-ala ja tilavuus -->
+    <div class="calculator-box">
+        <h2>Pinta-ala ja tilavuus</h2>
+        <select id="shape-type">
+            <option value="rectangle">Suorakulmio</option>
+            <option value="circle">Ympyrä</option>
+            <option value="cube">Kuutio</option>
+        </select>
+        <div id="shape-inputs"></div>
+        <button onclick="calculateAreaVolume()">Laske</button>
+        <p id="area-volume-result">-</p>
+    </div>
+
+    <!-- Peruslaskin -->
+    <div class="calculator-box">
+        <h2>Peruslaskin</h2>
+        <input type="number" id="basic-num1" placeholder="Luku 1">
+        <input type="number" id="basic-num2" placeholder="Luku 2">
+        <button onclick="basicCalculator('+')">+</button>
+        <button onclick="basicCalculator('-')">-</button>
+        <button onclick="basicCalculator('*')">*</button>
+        <button onclick="basicCalculator('/')">/</button>
+        <p id="basic-result">-</p>
+    </div>
+
+    <!-- Pythagoraan laskuri -->
+    <div class="calculator-box">
+        <h2>Pythagoraan laskuri</h2>
+        <input type="number" id="side-a" placeholder="Sivu A">
+        <input type="number" id="side-b" placeholder="Sivu B">
+        <button onclick="calculateHypotenuse()">Laske hypotenuusa</button>
+        <p id="hypotenuse-result">-</p>
+    </div>
+
     <!-- Prosenttilaskuri -->
     <div class="calculator-box">
         <h2>Prosenttilaskuri</h2>
-        <select id="percent-type">
-            <option value="discount">Alennus</option>
-            <option value="increase">Korotus</option>
-            <option value="percentage">Kuinka monta prosenttia</option>
-            <option value="change">Prosentuaalinen muutos</option>
-        </select>
-        <div id="percent-inputs"></div>
-        <button onclick="calculatePercentage()">Laske</button>
+        <input type="number" id="percent-value" placeholder="Prosentti">
+        <input type="number" id="percent-base" placeholder="Alkuarvo">
+        <button onclick="calculatePercentage()">Laske prosentti</button>
         <p id="percent-result">-</p>
     </div>
 
-    <!-- Yksikkömuunnin -->
+    <!-- Keskiarvon laskija -->
     <div class="calculator-box">
-        <h2>Yksikkömuunnin</h2>
-        <select id="conversion-type">
-            <option value="length">Pituus</option>
-            <option value="weight">Paino</option>
-            <option value="volume">Tilavuus</option>
-            <option value="area">Pinta-ala</option>
-            <option value="speed">Nopeus</option>
-        </select>
-        <input type="number" id="conversion-value" placeholder="Arvo" step="any">
-        <select id="conversion-from"></select>
-        <select id="conversion-to"></select>
-        <button onclick="convertUnits()">Muunna</button>
-        <p id="conversion-result">-</p>
+        <h2>Keskiarvon laskija</h2>
+        <input type="text" id="average-input" placeholder="Syötä arvot pilkulla eroteltuna">
+        <button onclick="calculateAverage()">Laske keskiarvo</button>
+        <p id="average-result">-</p>
     </div>
 
-    <!-- Satunnaislukugeneraattori -->
+    <!-- Mediaanin laskija -->
     <div class="calculator-box">
-        <h2>Satunnaislukugeneraattori</h2>
-        <input type="number" id="rand-min" placeholder="Minimi">
-        <input type="number" id="rand-max" placeholder="Maksimi">
-        <button onclick="generateRandom()">Arvo</button>
-        <p id="rand-result">-</p>
+        <h2>Mediaanin laskija</h2>
+        <input type="text" id="median-input" placeholder="Syötä arvot pilkulla eroteltuna">
+        <button onclick="calculateMedian()">Laske mediaani</button>
+        <p id="median-result">-</p>
     </div>
 </div>
 
@@ -169,147 +222,99 @@
             localStorage.setItem('cookiesAccepted', 'true');
             document.getElementById("cookie-banner").style.display = "none";
         });
-
-        // Laskureiden päivitys
-        document.getElementById("percent-type").addEventListener("change", updatePercentInputs);
-        updatePercentInputs();
-        document.getElementById("conversion-type").addEventListener("change", updateUnitOptions);
-        updateUnitOptions();
     });
 
-    function updatePercentInputs() {
-        const type = document.getElementById("percent-type").value;
-        const container = document.getElementById("percent-inputs");
-        container.innerHTML = "";
-        if (type === "discount" || type === "increase") {
-            container.innerHTML = `
-                <div class="input-group">
-                    <label for="base-value">Alkuarvo</label>
-                    <input type="number" id="base-value" step="any">
-                </div>
-                <div class="input-group">
-                    <label for="percent-value">Prosentti</label>
-                    <input type="number" id="percent-value" step="any">
-                </div>`;
-        } else if (type === "percentage") {
-            container.innerHTML = `
-                <div class="input-group">
-                    <label for="part-value">Osa</label>
-                    <input type="number" id="part-value" step="any">
-                </div>
-                <div class="input-group">
-                    <label for="whole-value">Kokonaismäärä</label>
-                    <input type="number" id="whole-value" step="any">
-                </div>`;
-        } else if (type === "change") {
-            container.innerHTML = `
-                <div class="input-group">
-                    <label for="original-value">Alkuarvo</label>
-                    <input type="number" id="original-value" step="any">
-                </div>
-                <div class="input-group">
-                    <label for="new-value">Uusi arvo</label>
-                    <input type="number" id="new-value" step="any">
-                </div>`;
-        }
+    // Yhteenlasku
+    function calculateSum() {
+        const num1 = parseFloat(document.getElementById("sum1").value);
+        const num2 = parseFloat(document.getElementById("sum2").value);
+        document.getElementById("sum-result").textContent = isNaN(num1) || isNaN(num2) ? "Virheellinen syöte" : num1 + num2;
     }
 
-    function calculatePercentage() {
-        const type = document.getElementById("percent-type").value;
-        let result = "-";
-
-        if (type === "discount" || type === "increase") {
-            const base = parseFloat(document.getElementById("base-value").value);
-            const percent = parseFloat(document.getElementById("percent-value").value);
-            if (!isNaN(base) && !isNaN(percent)) {
-                const change = base * (percent / 100);
-                result = type === "discount" ? base - change : base + change;
-            }
-        } else if (type === "percentage") {
-            const part = parseFloat(document.getElementById("part-value").value);
-            const whole = parseFloat(document.getElementById("whole-value").value);
-            if (!isNaN(part) && !isNaN(whole) && whole !== 0) {
-                result = (part / whole) * 100 + "%";
-            }
-        } else if (type === "change") {
-            const original = parseFloat(document.getElementById("original-value").value);
-            const newValue = parseFloat(document.getElementById("new-value").value);
-            if (!isNaN(original) && !isNaN(newValue) && original !== 0) {
-                result = ((newValue - original) / original) * 100 + "%";
-            }
+    // Kertolaskutaulukko
+    function generateMultiplicationTable() {
+        const num = parseInt(document.getElementById("multiplication-input").value);
+        let tableHTML = '';
+        for (let i = 1; i <= 10; i++) {
+            tableHTML += `<p>${num} x ${i} = ${num * i}</p>`;
         }
+        document.getElementById("multiplication-table").innerHTML = tableHTML;
+    }
+
+    // Potenssilaskin
+    function calculatePower() {
+        const base = parseFloat(document.getElementById("base").value);
+        const exponent = parseInt(document.getElementById("exponent").value);
+        document.getElementById("power-result").textContent = isNaN(base) || isNaN(exponent) ? "Virheellinen syöte" : Math.pow(base, exponent);
+    }
+
+    // Neliöjuuri ja kuutiojuuri
+    function calculateRoots() {
+        const value = parseFloat(document.getElementById("square-root").value);
+        document.getElementById("root-result").textContent = isNaN(value) ? "Virheellinen syöte" : `Neliöjuuri: ${Math.sqrt(value)}, Kuutiojuuri: ${Math.cbrt(value)}`;
+    }
+
+    // Pinta-ala ja tilavuus
+    function calculateAreaVolume() {
+        const shape = document.getElementById("shape-type").value;
+        let result = "-";
+        if (shape === "rectangle") {
+            const length = parseFloat(document.getElementById("length").value);
+            const width = parseFloat(document.getElementById("width").value);
+            result = isNaN(length) || isNaN(width) ? "Virheellinen syöte" : length * width;
+        } else if (shape === "circle") {
+            const radius = parseFloat(document.getElementById("radius").value);
+            result = isNaN(radius) ? "Virheellinen syöte" : Math.PI * Math.pow(radius, 2);
+        } else if (shape === "cube") {
+            const side = parseFloat(document.getElementById("side").value);
+            result = isNaN(side) ? "Virheellinen syöte" : Math.pow(side, 3);
+        }
+        document.getElementById("area-volume-result").textContent = result;
+    }
+
+    // Peruslaskin
+    function basicCalculator(operator) {
+        const num1 = parseFloat(document.getElementById("basic-num1").value);
+        const num2 = parseFloat(document.getElementById("basic-num2").value);
+        let result = 0;
+        if (operator === '+') result = num1 + num2;
+        if (operator === '-') result = num1 - num2;
+        if (operator === '*') result = num1 * num2;
+        if (operator === '/') result = num2 !== 0 ? num1 / num2 : "Ei voi jakaa nollalla";
+        document.getElementById("basic-result").textContent = result;
+    }
+
+    // Pythagoraan laskuri
+    function calculateHypotenuse() {
+        const sideA = parseFloat(document.getElementById("side-a").value);
+        const sideB = parseFloat(document.getElementById("side-b").value);
+        const result = Math.sqrt(Math.pow(sideA, 2) + Math.pow(sideB, 2));
+        document.getElementById("hypotenuse-result").textContent = result;
+    }
+
+    // Prosenttilaskuri
+    function calculatePercentage() {
+        const percentValue = parseFloat(document.getElementById("percent-value").value);
+        const baseValue = parseFloat(document.getElementById("percent-base").value);
+        const result = (percentValue / 100) * baseValue;
         document.getElementById("percent-result").textContent = result;
     }
 
-    function updateUnitOptions() {
-        const type = document.getElementById('conversion-type').value;
-        const fromSelect = document.getElementById('conversion-from');
-        const toSelect = document.getElementById('conversion-to');
-        let units = [];
-
-        switch(type) {
-            case 'length':
-                units = ["mm", "cm", "m", "km", "tuuma", "jalka", "jaardi", "maili"];
-                break;
-            case 'weight':
-                units = ["mg", "g", "kg", "t", "unssi", "naula"];
-                break;
-            case 'volume':
-                units = ["ml", "cl", "dl", "l", "tl", "rkl", "kuppi", "gal", "pint"];
-                break;
-            case 'area':
-                units = ["mm²", "cm²", "m²", "ha", "km²", "tuuma²", "jalka²", "eekkeri"];
-                break;
-            case 'speed':
-                units = ["m/s", "km/h", "mph", "solmu", "äänennopeus"];
-                break;
-        }
-
-        fromSelect.innerHTML = '';
-        toSelect.innerHTML = '';
-        units.forEach(unit => {
-            const option1 = document.createElement('option');
-            option1.value = unit;
-            option1.textContent = unit;
-            fromSelect.appendChild(option1);
-
-            const option2 = document.createElement('option');
-            option2.value = unit;
-            option2.textContent = unit;
-            toSelect.appendChild(option2);
-        });
-
-        if (type === 'length') {
-            fromSelect.value = "m";
-            toSelect.value = "km";
-        }
+    // Keskiarvon laskija
+    function calculateAverage() {
+        const values = document.getElementById("average-input").value.split(',').map(v => parseFloat(v.trim()));
+        const sum = values.reduce((a, b) => a + b, 0);
+        const average = sum / values.length;
+        document.getElementById("average-result").textContent = average;
     }
 
-    function convertUnits() {
-        const type = document.getElementById('conversion-type').value;
-        const value = parseFloat(document.getElementById('conversion-value').value);
-        const fromUnit = document.getElementById('conversion-from').value;
-        const toUnit = document.getElementById('conversion-to').value;
-        let result = "-";
-
-        if (!isNaN(value)) {
-            if (type === 'length') {
-                result = convertLength(value, fromUnit, toUnit);
-            } else if (type === 'weight') {
-                result = convertWeight(value, fromUnit, toUnit);
-            } else if (type === 'volume') {
-                result = convertVolume(value, fromUnit, toUnit);
-            } else if (type === 'area') {
-                result = convertArea(value, fromUnit, toUnit);
-            } else if (type === 'speed') {
-                result = convertSpeed(value, fromUnit, toUnit);
-            }
-        }
-
-        document.getElementById('conversion-result').textContent = result;
+    // Mediaanin laskija
+    function calculateMedian() {
+        const values = document.getElementById("median-input").value.split(',').map(v => parseFloat(v.trim())).sort((a, b) => a - b);
+        const middle = Math.floor(values.length / 2);
+        const median = values.length % 2 === 0 ? (values[middle - 1] + values[middle]) / 2 : values[middle];
+        document.getElementById("median-result").textContent = median;
     }
-
-    // Lisää muut laskurifunktiot (muunnosfunktiot jne.) tähän tarvittaessa.
 </script>
 
 </body>
