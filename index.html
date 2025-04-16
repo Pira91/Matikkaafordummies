@@ -207,4 +207,737 @@
             </div>
             
             <div class="unit-circle">
-                <svg
+                <svg width="200" height="200" viewBox="0 0 200 200">
+                    <circle cx="100" cy="100" r="90" fill="#f8f9fa" stroke="#2c3e50" stroke-width="1.5"/>
+                    <line x1="100" y1="100" x2="190" y2="100" stroke="#7f8c8d" stroke-width="1.5"/>
+                    <line x1="100" y1="100" x2="100" y2="10" stroke="#7f8c8d" stroke-width="1.5"/>
+                    <path id="trig-circle-line" d="M100 100 L100 100" stroke="#e74c3c" stroke-width="2.5"/>
+                    <circle id="trig-circle-point" cx="100" cy="100" r="4" fill="#e74c3c" opacity="0"/>
+                </svg>
+            </div>
+        </div>
+
+        <!-- YHTÄLÖNRATKAISIN -->
+        <div class="calculator">
+            <h2>Yhtälönratkaisin</h2>
+            
+            <div class="input-group">
+                <label>Yhtälötyyppi</label>
+                <select id="equation-type">
+                    <option value="linear">1. asteen (ax + b = 0)</option>
+                    <option value="quadratic">2. asteen (ax² + bx + c = 0)</option>
+                </select>
+            </div>
+            
+            <div id="linear-eq" class="equation-input">
+                <div class="input-group">
+                    <label for="linear-a">Kerroin (a)</label>
+                    <input type="number" id="linear-a" placeholder="a" step="any">
+                </div>
+                <div class="input-group">
+                    <label for="linear-b">Vakio (b)</label>
+                    <input type="number" id="linear-b" placeholder="b" step="any">
+                </div>
+            </div>
+            
+            <div id="quadratic-eq" class="equation-input" style="display: none;">
+                <div class="input-group">
+                    <label for="quad-a">Kerroin (a)</label>
+                    <input type="number" id="quad-a" placeholder="a" step="any">
+                </div>
+                <div class="input-group">
+                    <label for="quad-b">Kerroin (b)</label>
+                    <input type="number" id="quad-b" placeholder="b" step="any">
+                </div>
+                <div class="input-group">
+                    <label for="quad-c">Vakio (c)</label>
+                    <input type="number" id="quad-c" placeholder="c" step="any">
+                </div>
+            </div>
+            
+            <button onclick="solveEquation()">Ratkaise yhtälö</button>
+            
+            <div class="result-box">
+                <p>Ratkaisu(t): <span class="result" id="equation-result">-</span></p>
+            </div>
+        </div>
+
+        <!-- LÄMPÖTILAMUUNTIN -->
+        <div class="calculator">
+            <h2>Lämpötilamuunnin</h2>
+            
+            <div class="input-group">
+                <label for="temp-input">Lämpötila</label>
+                <input type="number" id="temp-input" placeholder="Syötä lämpötila" step="0.1">
+            </div>
+            
+            <div class="input-group">
+                <label for="temp-from">Muunna</label>
+                <select id="temp-from">
+                    <option value="celsius">Celsius (°C)</option>
+                    <option value="fahrenheit">Fahrenheit (°F)</option>
+                    <option value="kelvin">Kelvin (K)</option>
+                </select>
+            </div>
+            
+            <div class="input-group">
+                <label for="temp-to">Muunnos</label>
+                <select id="temp-to">
+                    <option value="fahrenheit">Fahrenheit (°F)</option>
+                    <option value="celsius">Celsius (°C)</option>
+                    <option value="kelvin">Kelvin (K)</option>
+                </select>
+            </div>
+            
+            <button onclick="convertTemperature()">Muunna lämpötila</button>
+            
+            <div class="result-box">
+                <p>Tulos: <span class="result" id="temp-result">-</span></p>
+            </div>
+        </div>
+
+        <!-- PROSENTTILASKURI -->
+        <div class="calculator">
+            <h2>Prosenttilaskuri</h2>
+            
+            <div class="input-group">
+                <label>Laskutyyppi</label>
+                <select id="percent-type">
+                    <option value="discount">Alennuslaskuri</option>
+                    <option value="increase">Korotuslaskuri</option>
+                    <option value="percentage">Prosenttiosuus</option>
+                    <option value="change">Muutosprosentti</option>
+                </select>
+            </div>
+            
+            <div id="percent-inputs">
+                <!-- Sisältö päivitetään JavaScriptillä -->
+            </div>
+            
+            <button onclick="calculatePercentage()">Laske</button>
+            
+            <div class="result-box">
+                <p>Tulos: <span class="result" id="percent-result">-</span></p>
+            </div>
+        </div>
+
+        <!-- GEOMETRIA -->
+        <div class="calculator">
+            <h2>Geometria</h2>
+            
+            <div class="input-group">
+                <label>Laskutyyppi</label>
+                <select id="geometry-type">
+                    <option value="circle-area">Ympyrän pinta-ala</option>
+                    <option value="circle-circ">Ympyrän kehä</option>
+                    <option value="rectangle-area">Suorakulmion pinta-ala</option>
+                    <option value="triangle-area">Kolmion pinta-ala</option>
+                    <option value="pythagoras">Pythagoraan lause</option>
+                </select>
+            </div>
+            
+            <div id="geometry-inputs">
+                <!-- Sisältö päivitetään JavaScriptillä -->
+            </div>
+            
+            <button onclick="calculateGeometry()">Laske</button>
+            
+            <div class="result-box">
+                <p>Tulos: <span class="result" id="geometry-result">-</span></p>
+            </div>
+        </div>
+
+        <!-- YKSIKKÖMUUNTIN -->
+        <div class="calculator">
+            <h2>Yksikkömuunnin</h2>
+            
+            <div class="input-group">
+                <label>Muunnostyyppi</label>
+                <select id="conversion-type">
+                    <option value="length">Pituus</option>
+                    <option value="weight">Paino</option>
+                    <option value="volume">Tilavuus</option>
+                    <option value="area">Pinta-ala</option>
+                    <option value="speed">Nopeus</option>
+                </select>
+            </div>
+            
+            <div class="input-group">
+                <label for="conversion-value">Arvo</label>
+                <input type="number" id="conversion-value" placeholder="Syötä arvo" step="any">
+            </div>
+            
+            <div class="input-group">
+                <label for="conversion-from">Yksikkö (lähtö)</label>
+                <select id="conversion-from">
+                    <!-- Sisältö päivitetään JavaScriptillä -->
+                </select>
+            </div>
+            
+            <div class="input-group">
+                <label for="conversion-to">Yksikkö (kohde)</label>
+                <select id="conversion-to">
+                    <!-- Sisältö päivitetään JavaScriptillä -->
+                </select>
+            </div>
+            
+            <button onclick="convertUnits()">Muunna</button>
+            
+            <div class="result-box">
+                <p>Tulos: <span class="result" id="conversion-result">-</span></p>
+            </div>
+        </div>
+
+        <!-- SATUNNAISLUKUGENERAATTORI -->
+        <div class="calculator">
+            <h2>Satunnaisluku</h2>
+            
+            <div class="input-group">
+                <label for="random-min">Minimi</label>
+                <input type="number" id="random-min" placeholder="Pienin luku" value="1">
+            </div>
+            
+            <div class="input-group">
+                <label for="random-max">Maksimi</label>
+                <input type="number" id="random-max" placeholder="Suurin luku" value="100">
+            </div>
+            
+            <div class="input-group">
+                <label for="random-count">Lukujen määrä</label>
+                <input type="number" id="random-count" placeholder="Kuinka monta" value="1" min="1" max="20">
+            </div>
+            
+            <button onclick="generateRandom()">Generoi</button>
+            
+            <div class="result-box">
+                <p>Satunnaisluvut: <span class="result" id="random-result">-</span></p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© <span id="current-year"></span> ikamittarip.fi | Kaikki laskut tarkistettava manuaalisesti</p>
+    </footer>
+
+    <script>
+        // =====================
+        // YLEISET FUNKTIOT
+        // =====================
+        
+        // Päivitä nykyinen vuosi footterissa
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Näytä/piilota yhtälötyypin mukaan syötekentät
+        document.getElementById('equation-type').addEventListener('change', function() {
+            const type = this.value;
+            document.getElementById('linear-eq').style.display = type === 'linear' ? 'block' : 'none';
+            document.getElementById('quadratic-eq').style.display = type === 'quadratic' ? 'block' : 'none';
+        });
+        
+        // Päivitä prosenttilaskurin syötekentät
+        document.getElementById('percent-type').addEventListener('change', updatePercentageInputs);
+        
+        // Päivitä geometrialaskurin syötekentät
+        document.getElementById('geometry-type').addEventListener('change', updateGeometryInputs);
+        
+        // Päivitä yksikkömuuntimen valinnat
+        document.getElementById('conversion-type').addEventListener('change', updateUnitOptions);
+        
+        // Alustus
+        updatePercentageInputs();
+        updateGeometryInputs();
+        updateUnitOptions();
+        
+        // =====================
+        // LASKENTAFUNKTIOT
+        // =====================
+        
+        // 1. PERUSLASKIN
+        function calculate() {
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+            const operator = document.getElementById('operator').value;
+            
+            if (isNaN(num1) || isNaN(num2)) {
+                document.getElementById('basic-result').textContent = "Virhe: Syötä molemmat luvut";
+                return;
+            }
+            
+            let result;
+            switch(operator) {
+                case 'add': result = num1 + num2; break;
+                case 'subtract': result = num1 - num2; break;
+                case 'multiply': result = num1 * num2; break;
+                case 'divide': 
+                    if (num2 === 0) {
+                        document.getElementById('basic-result').textContent = "Virhe: Nollalla jako";
+                        return;
+                    }
+                    result = num1 / num2; 
+                    break;
+                case 'power': result = Math.pow(num1, num2); break;
+                case 'modulo': result = num1 % num2; break;
+                default: result = "Virhe: Tuntematon operaattori";
+            }
+            
+            document.getElementById('basic-result').textContent = result;
+        }
+        
+        // 2. TRIGONOMETRIA
+        function calculateTrig() {
+            const angleDeg = parseFloat(document.getElementById('trig-angle').value);
+            
+            if (isNaN(angleDeg)) {
+                document.getElementById('sin-result').textContent = "-";
+                document.getElementById('cos-result').textContent = "-";
+                document.getElementById('tan-result').textContent = "-";
+                return;
+            }
+            
+            const angleRad = angleDeg * (Math.PI / 180);
+            const sinValue = Math.sin(angleRad).toFixed(4);
+            const cosValue = Math.cos(angleRad).toFixed(4);
+            let tanValue = Math.tan(angleRad).toFixed(4);
+            
+            if (angleDeg % 90 === 0 && angleDeg % 180 !== 0) {
+                tanValue = "∞";
+            }
+            
+            document.getElementById('sin-result').textContent = sinValue;
+            document.getElementById('cos-result').textContent = cosValue;
+            document.getElementById('tan-result').textContent = tanValue;
+            updateUnitCircle(angleDeg);
+        }
+        
+        function updateUnitCircle(angleDeg) {
+            const angleRad = angleDeg * (Math.PI / 180);
+            const centerX = 100;
+            const centerY = 100;
+            const radius = 90;
+            
+            const pointX = centerX + radius * Math.cos(angleRad);
+            const pointY = centerY - radius * Math.sin(angleRad);
+            
+            document.getElementById('trig-circle-line').setAttribute("d", 
+                `M${centerX} ${centerY} L${pointX} ${pointY}`);
+            document.getElementById('trig-circle-point').setAttribute("cx", pointX);
+            document.getElementById('trig-circle-point').setAttribute("cy", pointY);
+            document.getElementById('trig-circle-point').style.opacity = "1";
+        }
+        
+        // 3. YHTÄLÖNRATKAISIN
+        function solveEquation() {
+            const type = document.getElementById('equation-type').value;
+            
+            if (type === 'linear') {
+                const a = parseFloat(document.getElementById('linear-a').value);
+                const b = parseFloat(document.getElementById('linear-b').value);
+                
+                if (isNaN(a) || isNaN(b)) {
+                    document.getElementById('equation-result').textContent = "Virhe: Syötä kertoimet";
+                    return;
+                }
+                
+                if (a === 0) {
+                    document.getElementById('equation-result').textContent = b === 0 ? "Äärettömän monta ratkaisua" : "Ei ratkaisua";
+                    return;
+                }
+                
+                const x = (-b / a).toFixed(4);
+                document.getElementById('equation-result').textContent = `x = ${x}`;
+            } else {
+                const a = parseFloat(document.getElementById('quad-a').value);
+                const b = parseFloat(document.getElementById('quad-b').value);
+                const c = parseFloat(document.getElementById('quad-c').value);
+                
+                if (isNaN(a) || isNaN(b) || isNaN(c)) {
+                    document.getElementById('equation-result').textContent = "Virhe: Syötä kertoimet";
+                    return;
+                }
+                
+                if (a === 0) {
+                    document.getElementById('equation-result').textContent = "Ei toisen asteen yhtälö";
+                    return;
+                }
+                
+                const discriminant = b * b - 4 * a * c;
+                
+                if (discriminant < 0) {
+                    document.getElementById('equation-result').textContent = "Ei reaalisia ratkaisuja";
+                } else if (discriminant === 0) {
+                    const x = (-b / (2 * a)).toFixed(4);
+                    document.getElementById('equation-result').textContent = `x = ${x} (kaksoisjuuri)`;
+                } else {
+                    const x1 = (-b + Math.sqrt(discriminant)) / (2 * a);
+                    const x2 = (-b - Math.sqrt(discriminant)) / (2 * a);
+                    document.getElementById('equation-result').textContent = `x₁ = ${x1.toFixed(4)}, x₂ = ${x2.toFixed(4)}`;
+                }
+            }
+        }
+        
+        // 4. LÄMPÖTILAMUUNTIN
+        function convertTemperature() {
+            const temp = parseFloat(document.getElementById('temp-input').value);
+            const from = document.getElementById('temp-from').value;
+            const to = document.getElementById('temp-to').value;
+            
+            if (isNaN(temp)) {
+                document.getElementById('temp-result').textContent = "Virhe: Syötä lämpötila";
+                return;
+            }
+            
+            // Muunna ensin Celsius-asteiksi
+            let celsius;
+            switch(from) {
+                case 'celsius': celsius = temp; break;
+                case 'fahrenheit': celsius = (temp - 32) * 5/9; break;
+                case 'kelvin': celsius = temp - 273.15; break;
+            }
+            
+            // Tarkista absoluuttinen nollapiste
+            if (celsius < -273.15) {
+                document.getElementById('temp-result').textContent = "Alle absoluuttisen nollapisteen!";
+                return;
+            }
+            
+            // Muunna halutuksi yksiköksi
+            let result;
+            switch(to) {
+                case 'celsius': result = celsius; break;
+                case 'fahrenheit': result = celsius * 9/5 + 32; break;
+                case 'kelvin': result = celsius + 273.15; break;
+            }
+            
+            // Muotoile tulos
+            let unit;
+            switch(to) {
+                case 'celsius': unit = "°C"; break;
+                case 'fahrenheit': unit = "°F"; break;
+                case 'kelvin': unit = "K"; break;
+            }
+            
+            document.getElementById('temp-result').textContent = result.toFixed(2) + " " + unit;
+        }
+        
+        // 5. PROSENTTILASKURI
+        function updatePercentageInputs() {
+            const type = document.getElementById('percent-type').value;
+            const container = document.getElementById('percent-inputs');
+            let html = "";
+            
+            switch(type) {
+                case 'discount':
+                    html = `
+                        <div class="input-group">
+                            <label for="original-price">Alkuperäinen hinta</label>
+                            <input type="number" id="original-price" placeholder="Hinta">
+                        </div>
+                        <div class="input-group">
+                            <label for="discount-percent">Alennusprosentti</label>
+                            <input type="number" id="discount-percent" placeholder="%">
+                        </div>
+                    `;
+                    break;
+                    
+                case 'increase':
+                    html = `
+                        <div class="input-group">
+                            <label for="original-value">Alkuperäinen arvo</label>
+                            <input type="number" id="original-value" placeholder="Arvo">
+                        </div>
+                        <div class="input-group">
+                            <label for="increase-percent">Korotusprosentti</label>
+                            <input type="number" id="increase-percent" placeholder="%">
+                        </div>
+                    `;
+                    break;
+                    
+                case 'percentage':
+                    html = `
+                        <div class="input-group">
+                            <label for="part-value">Osa</label>
+                            <input type="number" id="part-value" placeholder="Osa">
+                        </div>
+                        <div class="input-group">
+                            <label for="whole-value">Kokonaisuus</label>
+                            <input type="number" id="whole-value" placeholder="Kokonaisuus">
+                        </div>
+                    `;
+                    break;
+                    
+                case 'change':
+                    html = `
+                        <div class="input-group">
+                            <label for="old-value">Alkuperäinen arvo</label>
+                            <input type="number" id="old-value" placeholder="Vanha arvo">
+                        </div>
+                        <div class="input-group">
+                            <label for="new-value">Uusi arvo</label>
+                            <input type="number" id="new-value" placeholder="Uusi arvo">
+                        </div>
+                    `;
+                    break;
+            }
+            
+            container.innerHTML = html;
+        }
+        
+        function calculatePercentage() {
+            const type = document.getElementById('percent-type').value;
+            let result;
+            
+            switch(type) {
+                case 'discount':
+                    const price = parseFloat(document.getElementById('original-price').value);
+                    const discount = parseFloat(document.getElementById('discount-percent').value);
+                    
+                    if (isNaN(price) || isNaN(discount)) {
+                        document.getElementById('percent-result').textContent = "Virhe: Syötä arvot";
+                        return;
+                    }
+                    
+                    result = (price * (100 - discount) / 100).toFixed(2) + "€";
+                    break;
+                    
+                case 'increase':
+                    const original = parseFloat(document.getElementById('original-value').value);
+                    const increase = parseFloat(document.getElementById('increase-percent').value);
+                    
+                    if (isNaN(original) || isNaN(increase)) {
+                        document.getElementById('percent-result').textContent = "Virhe: Syötä arvot";
+                        return;
+                    }
+                    
+                    result = (original * (1 + increase/100)).toFixed(2);
+                    break;
+                    
+                case 'percentage':
+                    const part = parseFloat(document.getElementById('part-value').value);
+                    const whole = parseFloat(document.getElementById('whole-value').value);
+                    
+                    if (isNaN(part) || isNaN(whole) || whole === 0) {
+                        document.getElementById('percent-result').textContent = "Virhe: Syötä arvot";
+                        return;
+                    }
+                    
+                    result = ((part / whole) * 100).toFixed(2) + "%";
+                    break;
+                    
+                case 'change':
+                    const oldVal = parseFloat(document.getElementById('old-value').value);
+                    const newVal = parseFloat(document.getElementById('new-value').value);
+                    
+                    if (isNaN(oldVal) || isNaN(newVal) || oldVal === 0) {
+                        document.getElementById('percent-result').textContent = "Virhe: Syötä arvot";
+                        return;
+                    }
+                    
+                    result = (((newVal - oldVal) / oldVal) * 100).toFixed(2) + "%";
+                    break;
+            }
+            
+            document.getElementById('percent-result').textContent = result;
+        }
+        
+        // 6. GEOMETRIA
+        function updateGeometryInputs() {
+            const type = document.getElementById('geometry-type').value;
+            const container = document.getElementById('geometry-inputs');
+            let html = "";
+            
+            switch(type) {
+                case 'circle-area':
+                case 'circle-circ':
+                    html = `
+                        <div class="input-group">
+                            <label for="radius">Säde (r)</label>
+                            <input type="number" id="radius" placeholder="Säde">
+                        </div>
+                    `;
+                    break;
+                    
+                case 'rectangle-area':
+                    html = `
+                        <div class="input-group">
+                            <label for="width">Leveys</label>
+                            <input type="number" id="width" placeholder="Leveys">
+                        </div>
+                        <div class="input-group">
+                            <label for="height">Korkeus</label>
+                            <input type="number" id="height" placeholder="Korkeus">
+                        </div>
+                    `;
+                    break;
+                    
+                case 'triangle-area':
+                    html = `
+                        <div class="input-group">
+                            <label for="base">Kanta</label>
+                            <input type="number" id="base" placeholder="Kanta">
+                        </div>
+                        <div class="input-group">
+                            <label for="triangle-height">Korkeus</label>
+                            <input type="number" id="triangle-height" placeholder="Korkeus">
+                        </div>
+                    `;
+                    break;
+                    
+                case 'pythagoras':
+                    html = `
+                        <div class="input-group">
+                            <label for="side-a">Sivu a</label>
+                            <input type="number" id="side-a" placeholder="Sivu a">
+                        </div>
+                        <div class="input-group">
+                            <label for="side-b">Sivu b</label>
+                            <input type="number" id="side-b" placeholder="Sivu b">
+                        </div>
+                    `;
+                    break;
+            }
+            
+            container.innerHTML = html;
+        }
+        
+        function calculateGeometry() {
+            const type = document.getElementById('geometry-type').value;
+            let result;
+            
+            switch(type) {
+                case 'circle-area':
+                    const radius = parseFloat(document.getElementById('radius').value);
+                    
+                    if (isNaN(radius)) {
+                        document.getElementById('geometry-result').textContent = "Virhe: Syötä säde";
+                        return;
+                    }
+                    
+                    result = (Math.PI * radius * radius).toFixed(4);
+                    break;
+                    
+                case 'circle-circ':
+                    const radiusCirc = parseFloat(document.getElementById('radius').value);
+                    
+                    if (isNaN(radiusCirc)) {
+                        document.getElementById('geometry-result').textContent = "Virhe: Syötä säde";
+                        return;
+                    }
+                    
+                    result = (2 * Math.PI * radiusCirc).toFixed(4);
+                    break;
+                    
+                case 'rectangle-area':
+                    const width = parseFloat(document.getElementById('width').value);
+                    const height = parseFloat(document.getElementById('height').value);
+                    
+                    if (isNaN(width) || isNaN(height)) {
+                        document.getElementById('geometry-result').textContent = "Virhe: Syötä molemmat arvot";
+                        return;
+                    }
+                    
+                    result = (width * height).toFixed(4);
+                    break;
+                    
+                case 'triangle-area':
+                    const base = parseFloat(document.getElementById('base').value);
+                    const triHeight = parseFloat(document.getElementById('triangle-height').value);
+                    
+                    if (isNaN(base) || isNaN(triHeight)) {
+                        document.getElementById('geometry-result').textContent = "Virhe: Syötä molemmat arvot";
+                        return;
+                    }
+                    
+                    result = (0.5 * base * triHeight).toFixed(4);
+                    break;
+                    
+                case 'pythagoras':
+                    const a = parseFloat(document.getElementById('side-a').value);
+                    const b = parseFloat(document.getElementById('side-b').value);
+                    
+                    if (isNaN(a) || isNaN(b)) {
+                        document.getElementById('geometry-result').textContent = "Virhe: Syötä molemmat sivut";
+                        return;
+                    }
+                    
+                    result = Math.sqrt(a*a + b*b).toFixed(4);
+                    break;
+            }
+            
+            document.getElementById('geometry-result').textContent = result;
+        }
+        
+        // 7. YKSIKKÖMUUNTIN
+        function updateUnitOptions() {
+            const type = document.getElementById('conversion-type').value;
+            const fromSelect = document.getElementById('conversion-from');
+            const toSelect = document.getElementById('conversion-to');
+            
+            let units = [];
+            
+            switch(type) {
+                case 'length':
+                    units = ["mm", "cm", "m", "km", "tuuma", "jalka", "jaardi", "maili"];
+                    break;
+                    
+                case 'weight':
+                    units = ["mg", "g", "kg", "t", "unssi", "naula"];
+                    break;
+                    
+                case 'volume':
+                    units = ["ml", "cl", "dl", "l", "tl", "rkl", "kuppi", "gal", "pint"];
+                    break;
+                    
+                case 'area':
+                    units = ["mm²", "cm²", "m²", "ha", "km²", "tuuma²", "jalka²", "eekkeri"];
+                    break;
+                    
+                case 'speed':
+                    units = ["m/s", "km/h", "mph", "solmu", "äänennopeus"];
+                    break;
+            }
+            
+            // Tyhjennä ja täytä valinnat
+            fromSelect.innerHTML = '';
+            toSelect.innerHTML = '';
+            
+            units.forEach(unit => {
+                const option1 = document.createElement('option');
+                option1.value = unit;
+                option1.textContent = unit;
+                fromSelect.appendChild(option1);
+                
+                const option2 = document.createElement('option');
+                option2.value = unit;
+                option2.textContent = unit;
+                toSelect.appendChild(option2);
+            });
+            
+            // Aseta oletusarvot
+            if (type === 'length') {
+                fromSelect.value = "cm";
+                toSelect.value = "m";
+            } else if (type === 'weight') {
+                fromSelect.value = "kg";
+                toSelect.value = "g";
+            }
+        }
+        
+        function convertUnits() {
+            const type = document.getElementById('conversion-type').value;
+            const value = parseFloat(document.getElementById('conversion-value').value);
+            const from = document.getElementById('conversion-from').value;
+            const to = document.getElementById('conversion-to').value;
+            
+            if (isNaN(value)) {
+                document.getElementById('conversion-result').textContent = "Virhe: Syötä arvo";
+                return;
+            }
+            
+            if (from === to) {
+                document.getElementById('conversion-result').textContent = value + " " + from;
+                return;
+            }
+            
+            // Muunnokset pituudelle
+            if (type === 'length') {
+                // Muun
