@@ -189,6 +189,26 @@
         <input type="number" id="sum2" placeholder="Luku 2">
         <button onclick="calculateSum()">Laske</button>
         <p id="sum-result">-</p>
+        <!-- Lisää tämä YHTEENLASKU-laskurin diviin -->
+<div class="calculator-box">
+    <h2>Yhteenlasku</h2>
+    <input type="number" id="sum1" placeholder="Luku 1">
+    <input type="number" id="sum2" placeholder="Luku 2">
+    <div style="display: flex; gap: 10px;">
+        <button onclick="calculateSum()" style="flex: 3;">Laske</button>
+        <button onclick="resetInputs('sum1', 'sum2', 'sum-result')" style="flex: 1; background: #f44336;">⟲</button>
+    </div>
+    <p id="sum-result">-</p>
+</div>
+
+<!-- Lisää tämä JavaScriptiin -->
+function resetInputs(...ids) {
+    ids.forEach(id => {
+        const element = document.getElementById(id);
+        if (element.tagName === 'INPUT') element.value = '';
+        else element.textContent = '-';
+    });
+}
     </div>
 
     <!-- Kertolaskutaulukko -->
@@ -198,6 +218,29 @@
         <button onclick="generateMultiplicationTable()">Näytä taulukko</button>
         <div id="multiplication-table"></div>
     </div>
+    /* Lisää nämä tyylit */
+    
+.calculator-box h2 {
+    border-bottom: 2px solid var(--primary-blue);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+input:focus, select:focus {
+    outline: 2px solid var(--primary-blue);
+    border-color: transparent;
+}
+
+#multiplication-table p {
+    margin: 8px 0;
+    color: var(--text-light);
+}
+
+footer div {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
 
     <!-- Potenssilaskin -->
     <div class="calculator-box">
@@ -248,7 +291,27 @@
         <h2>Pythagoraan laskuri</h2>
         <input type="number" id="side-a" placeholder="Sivu A">
         <input type="number" id="side-b" placeholder="Sivu B">
-        <button onclick="calculateHypotenuse()">Laske hypotenuusa</button>
+        <button onclick=// 
+            Lisää tämä calculateHypotenuse()-funktion alkuun
+function calculateHypotenuse() {
+    const sideA = parseFloat(document.getElementById("side-a").value);
+    const sideB = parseFloat(document.getElementById("side-b").value);
+    
+    if (isNaN(sideA) {
+        document.getElementById("hypotenuse-result").textContent = "Syötä sivu A";
+        document.getElementById("side-a").focus();
+        return;
+    }
+    
+    if (isNaN(sideB)) {
+        document.getElementById("hypotenuse-result").textContent = "Syötä sivu B";
+        document.getElementById("side-b").focus();
+        return;
+    }
+    
+    document.getElementById("hypotenuse-result").textContent = 
+        "Hypotenuusa: " + Math.sqrt(sideA*sideA + sideB*sideB).toFixed(2);
+}"calculateHypotenuse()">Laske hypotenuusa</button>
         <p id="hypotenuse-result">-</p>
     </div>
 
