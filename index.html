@@ -275,13 +275,34 @@
             <option value="rectangle">Suorakulmio</option>
             <option value="circle">Ympyrä</option>
             <option value="cube">Kuutio</option>
+            <option value="sphere">Pallo</option>
+            <option value="cylinder">Lieriö</option>
         </select>
-        <div id="shape-inputs"></div>
+        <div id="shape-inputs">
+            <!-- Dynaamisesti generoidut kentät -->
+        </div>
         <div class="button-group">
             <button onclick="calculateAreaVolume()">Laske</button>
             <button class="reset-btn" onclick="resetShapeCalculator()">⟲</button>
         </div>
         <p id="area-volume-result">-</p>
+    </div>
+
+    <!-- Lämpötilamuunnin -->
+    <div class="calculator-box">
+        <h2>Lämpötilamuunnin</h2>
+        <select id="temp-conversion-type">
+            <option value="c-to-f">Celsius → Fahrenheit</option>
+            <option value="f-to-c">Fahrenheit → Celsius</option>
+            <option value="c-to-k">Celsius → Kelvin</option>
+            <option value="k-to-c">Kelvin → Celsius</option>
+        </select>
+        <input type="number" id="temp-input" placeholder="Syötä lämpötila">
+        <div class="button-group">
+            <button onclick="convertTemperature()">Muunna</button>
+            <button class="reset-btn" onclick="resetInputs('temp-input', 'temp-result')">⟲</button>
+        </div>
+        <p id="temp-result">-</p>
     </div>
 
     <!-- Peruslaskin -->
@@ -367,6 +388,9 @@
             document.getElementById("cookie-banner").style.display = "none";
             gtag('config', 'G-T09C7VFBV9');
         });
+
+        // Alustetaan muotojen input-kentät
+        updateShapeInputs();
     });
 
     // APUFUNKTIOT
@@ -440,6 +464,13 @@
             html = `<input type="number" id="radius" placeholder="Säde">`;
         } else if (shape === "cube") {
             html = `<input type="number" id="side" placeholder="Sivun pituus">`;
+        } else if (shape === "sphere") {
+            html = `<input type="number" id="sphere-radius" placeholder="Säde">`;
+        } else if (shape === "cylinder") {
+            html = `
+                <input type="number" id="cylinder-radius" placeholder="Säde">
+                <input type="number" id="cylinder-height" placeholder="Korkeus">
+            `;
         }
         
         document.getElementById("shape-inputs").innerHTML = html;
@@ -453,7 +484,7 @@
             if (shape === "rectangle") {
                 const length = parseFloat(document.getElementById("length").value);
                 const width = parseFloat(document.getElementById("width").value);
-                if (isNaN(length) throw "Syötä pituus";
+                if (isNaN(length)) throw "Syötä pituus";
                 if (isNaN(width)) throw "Syötä leveys";
                 result = `Pinta-ala: ${(length * width).toFixed(2)}`;
             } 
@@ -467,6 +498,22 @@
                 if (isNaN(side)) throw "Syötä sivun pituus";
                 result = `Tilavuus: ${Math.pow(side, 3).toFixed(2)}`;
             }
+            else if (shape === "sphere") {
+                const radius = parseFloat(document.getElementById("sphere-radius").value);
+                if (isNaN(radius)) throw "Syötä säde";
+                const volume = (4/3) * Math.PI * Math.pow(radius, 3);
+                const area = 4 * Math.PI * Math.pow(radius, 2);
+                result = `Tilavuus: ${volume.toFixed(2)}, Pinta-ala: ${area.toFixed(2)}`;
+            }
+            else if (shape === "cylinder") {
+                const radius = parseFloat(document.getElementById("cylinder-radius").value);
+                const height = parseFloat(document.getElementById("cylinder-height").value);
+                if (isNaN(radius)) throw "Syötä säde";
+                if (isNaN(height)) throw "Syötä korkeus";
+                const volume = Math.PI * Math.pow(radius, 2) * height;
+                const area = 2 * Math.PI * radius * (radius + height);
+                result = `Tilavuus: ${volume.toFixed(2)}, Pinta-ala: ${area.toFixed(2)}`;
+            }
         } catch (e) {
             result = e;
         }
@@ -474,12 +521,42 @@
         document.getElementById("area-volume-result").textContent = result;
     }
 
+    function convertTemperature() {
+        const type = document.getElementById("temp-conversion-type").value;
+        const temp = parseFloat(document.getElementById("temp-input").value);
+        
+        if (isNaN(temp)) {
+            document.getElementById("temp-result").textContent = "Syötä lämpötila";
+            return;
+        }
+        
+        let converted;
+        switch (type) {
+            case "c-to-f":
+                converted = (temp * 9/5) + 32;
+                document.getElementById("temp-result").textContent = `${temp}°C = ${converted.toFixed(2)}°F`;
+                break;
+            case "f-to-c":
+                converted = (temp - 32) * 5/9;
+                document.getElementById("temp-result").textContent = `${temp}°F = ${converted.toFixed(2)}°C`;
+                break;
+            case "c-to-k":
+                converted = temp + 273.15;
+                document.getElementById("temp-result").textContent = `${temp}°C = ${converted.toFixed(2)}K`;
+                break;
+            case "k-to-c":
+                converted = temp - 273.15;
+                document.getElementById("temp-result").textContent = `${temp}K = ${converted.toFixed(2)}°C`;
+                break;
+        }
+    }
+
     function basicCalculator(operator) {
         const num1 = parseFloat(document.getElementById("basic-num1").value);
         const num2 = parseFloat(document.getElementById("basic-num2").value);
         let result;
         
-        if (isNaN(num1) {
+        if (isNaN(num1)) {
             document.getElementById("basic-result").textContent = "Syötä luku 1";
             document.getElementById("basic-num1").focus();
             return;
@@ -574,9 +651,6 @@
         document.getElementById("median-result").textContent = 
             "Mediaani: " + median.toFixed(2);
     }
-
-    // Alustetaan muotojen input-kentät
-    updateShapeInputs();
 </script>
 </body>
 </html>
