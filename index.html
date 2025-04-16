@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="fi">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-T09C7VFBV9"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-T09C7VFBV9');
-</script>
+    <!-- Google tag (gtag.js) - Ladataan VAIN jos evästeet hyväksytty -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T09C7VFBV9"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      
+      // Config kutsutaan myöhemmin (jos evästeet hyväksytty)
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Tervetuloa ikamittarip.fi, jossa löydät kaikki matemaattiset työkalut, kuten prosenttilaskurit, yksikkömuuntimet, satunnaislukugeneraattorit ja paljon muuta.">
@@ -38,18 +38,32 @@
             width: 100%;
             background-color: #333;
             color: white;
-            padding: 10px;
+            padding: 12px 0;
             text-align: center;
             display: none;
             z-index: 1000;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
         }
 
-        #cookie-banner button {
+        #cookie-banner p {
+            margin: 0 auto 10px;
+            max-width: 800px;
+            line-height: 1.4;
+        }
+
+        #cookie-banner a {
+            color: #f1c40f;
+            text-decoration: underline;
+        }
+
+        #accept-cookies {
             background-color: #f1c40f;
             border: none;
-            padding: 5px 10px;
-            color: black;
+            padding: 8px 20px;
+            color: #333;
+            font-weight: bold;
             cursor: pointer;
+            border-radius: 4px;
         }
 
         .container {
@@ -58,6 +72,7 @@
             justify-content: center;
             gap: 20px;
             margin: 20px;
+            padding-bottom: 20px; /* Estää bannerin peittämästä sisältöä */
         }
 
         .calculator-box {
@@ -100,7 +115,6 @@
         .input-group {
             margin-bottom: 15px;
         }
-
     </style>
 </head>
 <body>
@@ -110,10 +124,10 @@
     <p>Kaikki matemaattiset työkalut yhdessä paikassa</p>
 </header>
 
-<!-- Evästebanneri -->
+<!-- UPDATED Evästebanneri -->
 <div id="cookie-banner">
-    <p>Verkkosivustollamme käytetään evästeitä. Hyväksyksesi evästeet, klikkaa hyväksy-nappia.</p>
-    <button id="accept-cookies">Hyväksy</button>
+    <p>Käytämme evästeitä sivuston toiminnan ja käyttökokemuksen parantamiseksi. <a href="/tietosuojaseloste">Lue tietosuojaseloste</a></p>
+    <button id="accept-cookies">Hyväksy evästeet</button>
 </div>
 
 <!-- Laskurit ja työkalut -->
@@ -213,25 +227,35 @@
 </div>
 
 <script>
+    // EVÄSTEBANNERIN LOGIIKKA
     document.addEventListener("DOMContentLoaded", () => {
-        // Evästebanneri
+        // Näytä banner vain jos evästeitä ei ole vielä hyväksytty
         if (!localStorage.getItem('cookiesAccepted')) {
             document.getElementById("cookie-banner").style.display = "block";
         }
+        
+        // Hyväksy-nappi
         document.getElementById("accept-cookies").addEventListener("click", () => {
             localStorage.setItem('cookiesAccepted', 'true');
             document.getElementById("cookie-banner").style.display = "none";
+            
+            // Aktivoi Google Analytics vasta nyt
+            gtag('config', 'G-T09C7VFBV9');
         });
+        
+        // Jos evästeet jo hyväksytty, aktivoi Analytics heti
+        if (localStorage.getItem('cookiesAccepted')) {
+            gtag('config', 'G-T09C7VFBV9');
+        }
     });
 
-    // Yhteenlasku
+    // LASKURIEN FUNKTIOT (pysyvät samoina kuin alkuperäisessä)
     function calculateSum() {
         const num1 = parseFloat(document.getElementById("sum1").value);
         const num2 = parseFloat(document.getElementById("sum2").value);
         document.getElementById("sum-result").textContent = isNaN(num1) || isNaN(num2) ? "Virheellinen syöte" : num1 + num2;
     }
 
-    // Kertolaskutaulukko
     function generateMultiplicationTable() {
         const num = parseInt(document.getElementById("multiplication-input").value);
         let tableHTML = '';
@@ -241,20 +265,17 @@
         document.getElementById("multiplication-table").innerHTML = tableHTML;
     }
 
-    // Potenssilaskin
     function calculatePower() {
         const base = parseFloat(document.getElementById("base").value);
         const exponent = parseInt(document.getElementById("exponent").value);
         document.getElementById("power-result").textContent = isNaN(base) || isNaN(exponent) ? "Virheellinen syöte" : Math.pow(base, exponent);
     }
 
-    // Neliöjuuri ja kuutiojuuri
     function calculateRoots() {
         const value = parseFloat(document.getElementById("square-root").value);
         document.getElementById("root-result").textContent = isNaN(value) ? "Virheellinen syöte" : `Neliöjuuri: ${Math.sqrt(value)}, Kuutiojuuri: ${Math.cbrt(value)}`;
     }
 
-    // Pinta-ala ja tilavuus
     function calculateAreaVolume() {
         const shape = document.getElementById("shape-type").value;
         let result = "-";
@@ -272,7 +293,6 @@
         document.getElementById("area-volume-result").textContent = result;
     }
 
-    // Peruslaskin
     function basicCalculator(operator) {
         const num1 = parseFloat(document.getElementById("basic-num1").value);
         const num2 = parseFloat(document.getElementById("basic-num2").value);
@@ -284,7 +304,6 @@
         document.getElementById("basic-result").textContent = result;
     }
 
-    // Pythagoraan laskuri
     function calculateHypotenuse() {
         const sideA = parseFloat(document.getElementById("side-a").value);
         const sideB = parseFloat(document.getElementById("side-b").value);
@@ -292,7 +311,6 @@
         document.getElementById("hypotenuse-result").textContent = result;
     }
 
-    // Prosenttilaskuri
     function calculatePercentage() {
         const percentValue = parseFloat(document.getElementById("percent-value").value);
         const baseValue = parseFloat(document.getElementById("percent-base").value);
@@ -300,7 +318,6 @@
         document.getElementById("percent-result").textContent = result;
     }
 
-    // Keskiarvon laskija
     function calculateAverage() {
         const values = document.getElementById("average-input").value.split(',').map(v => parseFloat(v.trim()));
         const sum = values.reduce((a, b) => a + b, 0);
@@ -308,7 +325,6 @@
         document.getElementById("average-result").textContent = average;
     }
 
-    // Mediaanin laskija
     function calculateMedian() {
         const values = document.getElementById("median-input").value.split(',').map(v => parseFloat(v.trim())).sort((a, b) => a - b);
         const middle = Math.floor(values.length / 2);
