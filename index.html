@@ -7,6 +7,21 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
+          
+        // LISÄÄ TÄMÄ ANONYMISOINTI:
+      gtag('config', 'G-T09C7VFBV9', { 
+        'anonymize_ip': true,
+        'allow_google_signals': false  // Estää henkilökohtaisten mainostietojen keräyksen
+      });
+    </script>
+</head>
+        <!-- CSP - ESTÄÄ HAITALLISET SKRIPTIT -->
+    <meta http-equiv="Content-Security-Policy" 
+          content="default-src 'self'; 
+                   script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; 
+                   style-src 'self' 'unsafe-inline'; 
+                   img-src 'self' data: https://www.google-analytics.com;">
+    </head>
       
       // Config kutsutaan myöhemmin (jos evästeet hyväksytty)
     </script>
@@ -332,6 +347,14 @@
         document.getElementById("median-result").textContent = median;
     }
 </script>
-
+<footer style="background-color: #333; color: white; padding: 20px; text-align: center; margin-top: 30px;">
+    <div style="max-width: 800px; margin: 0 auto;">
+        <p>© 2024 ikamittarip.fi – Matemaattiset työkalut kaikille</p>
+        <p>
+            <a href="/tietosuojaseloste" style="color: #f1c40f; margin: 0 10px;">Tietosuojaseloste</a>
+            <a href="/kayttoehdot" style="color: #f1c40f; margin: 0 10px;">Käyttöehdot</a>
+        </p>
+    </div>
+</footer>
 </body>
 </html>
