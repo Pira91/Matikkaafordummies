@@ -16,15 +16,31 @@
         h2 {
             color: #4a90e2;
             text-align: center;
+            margin-top: 20px;
         }
 
         .container {
-            max-width: 800px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
             margin: 20px auto;
             padding: 20px;
             background-color: #ffffff;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .calculator-box {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .calculator-box:hover {
+            transform: translateY(-5px);
         }
 
         .input-group {
@@ -83,99 +99,109 @@
             padding: 5px 0;
             text-align: center;
         }
-
-        .input-group button {
-            margin: 10px 0;
-        }
-
-        .container h2 {
-            margin-top: 0;
-        }
     </style>
 </head>
 <body>
+    <h2>Matikkatyokalut</h2>
     <div class="container">
-        <h2>Matikkatyokalut</h2>
-
-        <div class="input-group">
+        <div class="calculator-box">
             <h3>Yhteenlasku/Laskin</h3>
-            <input type="number" id="sum-value1" placeholder="Luku 1">
-            <input type="number" id="sum-value2" placeholder="Luku 2">
-            <button onclick="addNumbers()">Laske yhteen</button>
-            <p id="sum-result" class="result">-</p>
+            <div class="input-group">
+                <input type="number" id="sum-value1" placeholder="Luku 1">
+                <input type="number" id="sum-value2" placeholder="Luku 2">
+                <button onclick="addNumbers()">Laske yhteen</button>
+                <p id="sum-result" class="result">-</p>
+            </div>
         </div>
 
-        <div class="input-group">
+        <div class="calculator-box">
             <h3>Kertolaskutaulukko</h3>
-            <input type="number" id="multiplication-table" placeholder="Numero">
-            <button onclick="generateMultiplicationTable()">Generoi taulukko</button>
-            <p id="multiplication-table-result" class="result">-</p>
+            <div class="input-group">
+                <input type="number" id="multiplication-table" placeholder="Numero">
+                <button onclick="generateMultiplicationTable()">Generoi taulukko</button>
+                <p id="multiplication-table-result" class="result">-</p>
+            </div>
         </div>
 
-        <div class="input-group">
+        <div class="calculator-box">
             <h3>Potenssilaskin</h3>
-            <input type="number" id="base-number" placeholder="Perusluku">
-            <input type="number" id="exponent" placeholder="Eksponentti">
-            <button onclick="calculatePower()">Laske potenssi</button>
-            <p id="power-result" class="result">-</p>
+            <div class="input-group">
+                <input type="number" id="base-number" placeholder="Perusluku">
+                <input type="number" id="exponent" placeholder="Eksponentti">
+                <button onclick="calculatePower()">Laske potenssi</button>
+                <p id="power-result" class="result">-</p>
+            </div>
         </div>
 
-        <div class="input-group">
+        <div class="calculator-box">
             <h3>Neliöjuuri- ja kuutiojuurilaskin</h3>
-            <input type="number" id="square-root-value" placeholder="Luku">
-            <button onclick="calculateSquareRoot()">Laske neliöjuuri</button>
-            <p id="square-root-result" class="result">-</p>
-            <input type="number" id="cube-root-value" placeholder="Luku">
-            <button onclick="calculateCubeRoot()">Laske kuutiojuuri</button>
-            <p id="cube-root-result" class="result">-</p>
+            <div class="input-group">
+                <input type="number" id="square-root-value" placeholder="Luku">
+                <button onclick="calculateSquareRoot()">Laske neliöjuuri</button>
+                <p id="square-root-result" class="result">-</p>
+                <input type="number" id="cube-root-value" placeholder="Luku">
+                <button onclick="calculateCubeRoot()">Laske kuutiojuuri</button>
+                <p id="cube-root-result" class="result">-</p>
+            </div>
         </div>
 
-        <div class="input-group">
+        <div class="calculator-box">
             <h3>Pinta-alan ja tilavuuden laskimet</h3>
             <h4>Suorakulmio</h4>
-            <input type="number" id="rect-length" placeholder="Pituus">
-            <input type="number" id="rect-width" placeholder="Leveys">
-            <button onclick="calculateRectangleArea()">Laske pinta-ala</button>
-            <p id="rectangle-area" class="result">-</p>
+            <div class="input-group">
+                <input type="number" id="rect-length" placeholder="Pituus">
+                <input type="number" id="rect-width" placeholder="Leveys">
+                <button onclick="calculateRectangleArea()">Laske pinta-ala</button>
+                <p id="rectangle-area" class="result">-</p>
+            </div>
 
             <h4>Ympyrä</h4>
-            <input type="number" id="circle-radius" placeholder="Säde">
-            <button onclick="calculateCircleArea()">Laske pinta-ala</button>
-            <p id="circle-area" class="result">-</p>
+            <div class="input-group">
+                <input type="number" id="circle-radius" placeholder="Säde">
+                <button onclick="calculateCircleArea()">Laske pinta-ala</button>
+                <p id="circle-area" class="result">-</p>
+            </div>
         </div>
 
-        <div class="input-group">
+        <div class="calculator-box">
             <h3>Peruslaskin</h3>
-            <input type="number" id="basic-value1" placeholder="Luku 1">
-            <input type="number" id="basic-value2" placeholder="Luku 2">
-            <button onclick="calculateBasicMath()">Laske</button>
-            <p id="basic-math-result" class="result">-</p>
+            <div class="input-group">
+                <input type="number" id="basic-value1" placeholder="Luku 1">
+                <input type="number" id="basic-value2" placeholder="Luku 2">
+                <button onclick="calculateBasicMath()">Laske</button>
+                <p id="basic-math-result" class="result">-</p>
+            </div>
         </div>
 
-        <div class="input-group">
+        <div class="calculator-box">
             <h3>Pythagoraan laskuri</h3>
-            <input type="number" id="pythagoras-side1" placeholder="Sivu 1">
-            <input type="number" id="pythagoras-side2" placeholder="Sivu 2">
-            <button onclick="calculatePythagoras()">Laske hypotenuusa</button>
-            <p id="pythagoras-result" class="result">-</p>
+            <div class="input-group">
+                <input type="number" id="pythagoras-side1" placeholder="Sivu 1">
+                <input type="number" id="pythagoras-side2" placeholder="Sivu 2">
+                <button onclick="calculatePythagoras()">Laske hypotenuusa</button>
+                <p id="pythagoras-result" class="result">-</p>
+            </div>
         </div>
 
-        <div class="input-group">
+        <div class="calculator-box">
             <h3>Prosenttiluvun lasku erissä</h3>
-            <input type="number" id="principal-amount" placeholder="Pääoma">
-            <input type="number" id="interest-rate" placeholder="Korko">
-            <input type="number" id="time-period" placeholder="Aika (vuosina)">
-            <button onclick="calculateCompoundInterest()">Laske korkoa korolle</button>
-            <p id="compound-interest-result" class="result">-</p>
+            <div class="input-group">
+                <input type="number" id="principal-amount" placeholder="Pääoma">
+                <input type="number" id="interest-rate" placeholder="Korko">
+                <input type="number" id="time-period" placeholder="Aika (vuosina)">
+                <button onclick="calculateCompoundInterest()">Laske korkoa korolle</button>
+                <p id="compound-interest-result" class="result">-</p>
+            </div>
         </div>
 
-        <div class="input-group">
+        <div class="calculator-box">
             <h3>Keskiarvon ja mediaanin laskija</h3>
-            <input type="text" id="numbers-input" placeholder="Syötä luvut pilkulla erotettuna">
-            <button onclick="calculateMeanMedian()">Laske keskiarvo ja mediaani</button>
-            <p id="mean-median-result" class="result">-</p>
+            <div class="input-group">
+                <input type="text" id="numbers-input" placeholder="Syötä luvut pilkulla erotettuna">
+                <button onclick="calculateMeanMedian()">Laske keskiarvo ja mediaani</button>
+                <p id="mean-median-result" class="result">-</p>
+            </div>
         </div>
-
     </div>
 
     <script>
@@ -183,4 +209,3 @@
     </script>
 </body>
 </html>
-
