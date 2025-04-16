@@ -3,93 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ikamittarip.fi - Matemaattiset työkalut</title>
+    <title>ikamittarip.fi - Edistynyt matemaattinen työkalu</title>
     <style>
         /* Yleiset tyylit */
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+        }
+        
         body {
             font-family: 'Arial', sans-serif;
             line-height: 1.6;
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
             background-color: #f5f5f5;
-            color: #333;
+            color: var(--dark);
         }
         
         header {
-            background-color: #2c3e50;
+            background-color: var(--primary);
             color: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
             text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         
         h1, h2, h3 {
-            color: #2c3e50;
+            color: var(--primary);
         }
         
-        /* Laskurien tyylit */
-        .calculator {
-            background-color: white;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        
+        /* Laskurien asettelu */
         .calculator-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
         }
         
+        .calculator {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .calculator:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Syöttökentät ja napit */
         input, select, button {
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            padding: 12px;
+            margin: 8px 0;
+            border: 2px solid #ddd;
+            border-radius: 6px;
             width: 100%;
-            max-width: 200px;
+            max-width: 250px;
+            font-size: 16px;
         }
         
         button {
-            background-color: #3498db;
+            background-color: var(--secondary);
             color: white;
-            cursor: pointer;
-            transition: background-color 0.3s;
             font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
         }
         
         button:hover {
             background-color: #2980b9;
+            transform: scale(1.02);
         }
         
         .result {
             font-weight: bold;
-            color: #e74c3c;
-            font-size: 1.2em;
+            color: var(--accent);
+            font-size: 1.3em;
+            margin-top: 10px;
         }
         
-        /* Trigonometria-animaatio */
+        /* Erikoistyylit muuntimille */
+        .converter-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid var(--secondary);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 6px;
+        }
+        
+        .converter-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 12px 0;
+            flex-wrap: wrap;
+        }
+        
+        .converter-arrow {
+            font-size: 1.5em;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+        
+        /* Yksikköympyrä */
         .unit-circle {
-            position: relative;
-            width: 150px;
-            height: 150px;
-            margin: 10px auto;
+            width: 180px;
+            height: 180px;
+            margin: 15px auto;
         }
         
+        /* Footer */
         footer {
             text-align: center;
-            margin-top: 30px;
+            margin-top: 40px;
+            padding: 20px;
             color: #7f8c8d;
+            font-size: 0.9em;
         }
     </style>
 </head>
 <body>
     <header>
         <h1>ikamittarip.fi</h1>
-        <p>Matemaattiset työkalut ja ratkaisut</p>
+        <p>Edistynyt matemaattinen työkalu</p>
     </header>
 
     <div class="calculator-grid">
@@ -102,10 +144,11 @@
                 <option value="subtract">-</option>
                 <option value="multiply">×</option>
                 <option value="divide">÷</option>
+                <option value="power">Potenssi (xʸ)</option>
             </select>
             <input type="number" id="num2" placeholder="Luku 2">
             <button onclick="calculate()">Laske</button>
-            <p>Tulos: <span class="result" id="basic-result">-</span></p>
+            <p class="result" id="basic-result">-</p>
         </div>
 
         <!-- PYTHAGORAS -->
@@ -114,44 +157,115 @@
             <input type="number" id="a" placeholder="Kateetti a">
             <input type="number" id="b" placeholder="Kateetti b">
             <button onclick="pythagoras()">Laske hypotenuusa</button>
-            <p>Hypotenuusa: <span class="result" id="pythagoras-result">-</span></p>
-        </div>
-
-        <!-- BMI-LASKURI -->
-        <div class="calculator">
-            <h2>BMI-Laskuri</h2>
-            <input type="number" id="weight" placeholder="Paino (kg)">
-            <input type="number" id="height" placeholder="Pituus (cm)">
-            <button onclick="calculateBMI()">Laske BMI</button>
-            <p>BMI: <span class="result" id="bmi-result">-</span></p>
+            <p class="result" id="pythagoras-result">-</p>
         </div>
 
         <!-- TRIGONOMETRIA -->
         <div class="calculator">
-            <h2>Trigonometrian laskuri</h2>
+            <h2>Trigonometria</h2>
             <input type="number" id="trig-angle" placeholder="Kulma (asteet)" min="0" max="360" step="0.1">
             <button onclick="calculateTrig()">Laske</button>
             
-            <div style="margin-top: 15px;">
-                <p>sin(θ) = <span class="result" id="sin-result">-</span></p>
-                <p>cos(θ) = <span class="result" id="cos-result">-</span></p>
-                <p>tan(θ) = <span class="result" id="tan-result">-</span></p>
+            <div class="converter-box">
+                <div class="converter-row">
+                    <span>sin(θ) =</span>
+                    <span class="result" id="sin-result">-</span>
+                </div>
+                <div class="converter-row">
+                    <span>cos(θ) =</span>
+                    <span class="result" id="cos-result">-</span>
+                </div>
+                <div class="converter-row">
+                    <span>tan(θ) =</span>
+                    <span class="result" id="tan-result">-</span>
+                </div>
             </div>
             
             <div class="unit-circle">
-                <svg width="150" height="150" viewBox="0 0 150 150">
-                    <circle cx="75" cy="75" r="70" fill="#f8f9fa" stroke="#2c3e50"/>
-                    <line x1="75" y1="75" x2="145" y2="75" stroke="#7f8c8d" stroke-width="1"/>
-                    <line x1="75" y1="75" x2="75" y2="5" stroke="#7f8c8d" stroke-width="1"/>
-                    <path id="trig-circle-line" d="M75 75 L75 75" stroke="#e74c3c" stroke-width="2"/>
-                    <circle id="trig-circle-point" cx="75" cy="75" r="3" fill="#e74c3c" opacity="0"/>
+                <svg width="180" height="180" viewBox="0 0 180 180">
+                    <circle cx="90" cy="90" r="80" fill="#f8f9fa" stroke="#2c3e50"/>
+                    <line x1="90" y1="90" x2="170" y2="90" stroke="#7f8c8d" stroke-width="1.5"/>
+                    <line x1="90" y1="90" x2="90" y2="10" stroke="#7f8c8d" stroke-width="1.5"/>
+                    <path id="trig-circle-line" d="M90 90 L90 90" stroke="#e74c3c" stroke-width="2.5"/>
+                    <circle id="trig-circle-point" cx="90" cy="90" r="4" fill="#e74c3c" opacity="0"/>
                 </svg>
+            </div>
+        </div>
+
+        <!-- LÄMPÖTILAMUUNTIN -->
+        <div class="calculator">
+            <h2>Lämpötilamuunnin</h2>
+            
+            <div class="converter-box">
+                <h3>Celsius ↔ Kelvin ↔ Fahrenheit</h3>
+                
+                <div class="converter-row">
+                    <input type="number" id="celsius-input" placeholder="°C">
+                    <span class="converter-arrow">⇄</span>
+                    <button onclick="celsiusToKelvin()">Kelvin</button>
+                    <span class="result" id="kelvin-result">- K</span>
+                </div>
+                
+                <div class="converter-row">
+                    <input type="number" id="fahrenheit-input" placeholder="°F">
+                    <span class="converter-arrow">⇄</span>
+                    <button onclick="fahrenheitToCelsius()">Celsius</button>
+                    <span class="result" id="celsius-result">- °C</span>
+                </div>
+                
+                <div class="converter-row">
+                    <button onclick="convertAllTemps()" style="background-color: var(--accent);">Muunna kaikki</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MATEMATIIKKAA -->
+        <div class="calculator">
+            <h2>Matemaattisia funktioita</h2>
+            
+            <div class="converter-box">
+                <h3>Neliöjuuri</h3>
+                <input type="number" id="sqrt-input" placeholder="Luku (≥ 0)">
+                <button onclick="calculateSqrt()">Laske</button>
+                <p class="result" id="sqrt-result">-</p>
+            </div>
+            
+            <div class="converter-box">
+                <h3>Logaritmi</h3>
+                <input type="number" id="log-input" placeholder="Luku (> 0)">
+                <select id="log-base">
+                    <option value="10">10-kantainen</option>
+                    <option value="2">2-kantainen</option>
+                    <option value="Math.E">Luonnollinen (e)</option>
+                </select>
+                <button onclick="calculateLog()">Laske</button>
+                <p class="result" id="log-result">-</p>
+            </div>
+        </div>
+
+        <!-- GEOMETRIAA -->
+        <div class="calculator">
+            <h2>Geometriaa</h2>
+            
+            <div class="converter-box">
+                <h3>Ympyrän pinta-ala</h3>
+                <input type="number" id="radius" placeholder="Säde (r)">
+                <button onclick="calculateCircleArea()">Laske</button>
+                <p class="result" id="circle-area-result">-</p>
+            </div>
+            
+            <div class="converter-box">
+                <h3>Suorakulmion pinta-ala</h3>
+                <input type="number" id="rect-width" placeholder="Leveys">
+                <input type="number" id="rect-height" placeholder="Korkeus">
+                <button onclick="calculateRectArea()">Laske</button>
+                <p class="result" id="rect-area-result">-</p>
             </div>
         </div>
     </div>
 
     <footer>
-        <p>© <span id="current-year"></span> ikamittarip.fi - Kaikki laskut tarkistettava manuaalisesti</p>
+        <p>© <span id="current-year"></span> ikamittarip.fi | Kaikki laskut tarkistettava manuaalisesti</p>
     </footer>
 
     <script>
@@ -167,6 +281,7 @@
                 case 'subtract': result = num1 - num2; break;
                 case 'multiply': result = num1 * num2; break;
                 case 'divide': result = num1 / num2; break;
+                case 'power': result = Math.pow(num1, num2); break;
                 default: result = "Virhe";
             }
 
@@ -178,18 +293,10 @@
             const a = parseFloat(document.getElementById('a').value);
             const b = parseFloat(document.getElementById('b').value);
             const c = Math.sqrt(a*a + b*b);
-            document.getElementById('pythagoras-result').textContent = c.toFixed(2);
+            document.getElementById('pythagoras-result').textContent = c.toFixed(4);
         }
 
-        // 3. BMI-LASKURI
-        function calculateBMI() {
-            const weight = parseFloat(document.getElementById('weight').value);
-            const height = parseFloat(document.getElementById('height').value) / 100;
-            const bmi = weight / (height * height);
-            document.getElementById('bmi-result').textContent = bmi.toFixed(1);
-        }
-
-        // 4. TRIGONOMETRIA
+        // 3. TRIGONOMETRIA
         function calculateTrig() {
             const angleDeg = parseFloat(document.getElementById('trig-angle').value);
             const angleRad = angleDeg * (Math.PI / 180);
@@ -210,9 +317,9 @@
 
         function updateUnitCircle(angleDeg) {
             const angleRad = angleDeg * (Math.PI / 180);
-            const centerX = 75;
-            const centerY = 75;
-            const radius = 70;
+            const centerX = 90;
+            const centerY = 90;
+            const radius = 80;
             
             const pointX = centerX + radius * Math.cos(angleRad);
             const pointY = centerY - radius * Math.sin(angleRad);
@@ -222,6 +329,83 @@
             document.getElementById('trig-circle-point').setAttribute("cx", pointX);
             document.getElementById('trig-circle-point').setAttribute("cy", pointY);
             document.getElementById('trig-circle-point').style.opacity = "1";
+        }
+
+        // 4. LÄMPÖTILAMUUNNOS
+        function celsiusToKelvin() {
+            const celsius = parseFloat(document.getElementById('celsius-input').value);
+            if (isNaN(celsius)) return;
+            const kelvin = (celsius + 273.15).toFixed(2);
+            document.getElementById('kelvin-result').textContent = kelvin + " K";
+        }
+
+        function fahrenheitToCelsius() {
+            const fahrenheit = parseFloat(document.getElementById('fahrenheit-input').value);
+            if (isNaN(fahrenheit)) return;
+            const celsius = ((fahrenheit - 32) * 5/9).toFixed(2);
+            document.getElementById('celsius-result').textContent = celsius + " °C";
+        }
+
+        function convertAllTemps() {
+            const celsius = parseFloat(document.getElementById('celsius-input').value);
+            const fahrenheit = parseFloat(document.getElementById('fahrenheit-input').value);
+            
+            if (!isNaN(celsius)) {
+                const kelvin = (celsius + 273.15).toFixed(2);
+                const fahr = (celsius * 9/5 + 32).toFixed(2);
+                document.getElementById('kelvin-result').textContent = kelvin + " K";
+                document.getElementById('fahrenheit-input').value = fahr;
+                document.getElementById('celsius-result').textContent = celsius + " °C";
+            } else if (!isNaN(fahrenheit)) {
+                const celsius = ((fahrenheit - 32) * 5/9).toFixed(2);
+                const kelvin = (celsius + 273.15).toFixed(2);
+                document.getElementById('celsius-result').textContent = celsius + " °C";
+                document.getElementById('kelvin-result').textContent = kelvin + " K";
+                document.getElementById('celsius-input').value = celsius;
+            }
+        }
+
+        // 5. MATEMATIIKKAA
+        function calculateSqrt() {
+            const num = parseFloat(document.getElementById('sqrt-input').value);
+            if (num < 0) {
+                document.getElementById('sqrt-result').textContent = "Virhe: negatiivinen luku";
+            } else {
+                document.getElementById('sqrt-result').textContent = Math.sqrt(num).toFixed(4);
+            }
+        }
+
+        function calculateLog() {
+            const num = parseFloat(document.getElementById('log-input').value);
+            const base = document.getElementById('log-base').value;
+            
+            if (num <= 0) {
+                document.getElementById('log-result').textContent = "Virhe: luku ≤ 0";
+                return;
+            }
+            
+            let result;
+            if (base === "Math.E") {
+                result = Math.log(num).toFixed(4);
+            } else {
+                result = (Math.log(num) / Math.log(parseFloat(base))).toFixed(4);
+            }
+            
+            document.getElementById('log-result').textContent = result;
+        }
+
+        // 6. GEOMETRIAA
+        function calculateCircleArea() {
+            const r = parseFloat(document.getElementById('radius').value);
+            const area = (Math.PI * r * r).toFixed(4);
+            document.getElementById('circle-area-result').textContent = area;
+        }
+
+        function calculateRectArea() {
+            const width = parseFloat(document.getElementById('rect-width').value);
+            const height = parseFloat(document.getElementById('rect-height').value);
+            const area = (width * height).toFixed(4);
+            document.getElementById('rect-area-result').textContent = area;
         }
 
         // Näytä nykyinen vuosi footterissa
