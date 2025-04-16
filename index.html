@@ -28,6 +28,7 @@
             --light-gray: #f5f5f5;
             --text-dark: #202124;
             --text-light: #5f6368;
+            --error-red: #f44336;
         }
 
         body {
@@ -106,18 +107,12 @@
             box-shadow: 0 5px 15px rgba(26, 115, 232, 0.2);
         }
 
-        h1, h2 {
+        .calculator-box h2 {
             color: var(--primary-blue);
-        }
-
-        h1 {
-            margin: 0;
-            font-size: 2.2em;
-        }
-
-        h2 {
+            border-bottom: 2px solid var(--primary-blue);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
             font-size: 1.5em;
-            margin-top: 0;
         }
 
         input, select, button {
@@ -127,6 +122,11 @@
             border-radius: 6px;
             border: 1px solid #dadce0;
             font-size: 16px;
+        }
+
+        input:focus, select:focus {
+            outline: 2px solid var(--primary-blue);
+            border-color: transparent;
         }
 
         button {
@@ -141,10 +141,29 @@
             background-color: var(--dark-blue);
         }
 
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .button-group button {
+            flex: 1;
+        }
+
+        .reset-btn {
+            background-color: var(--error-red);
+            flex: 0.5 !important;
+        }
+
         p {
             font-size: 1.2em;
             font-weight: bold;
             color: var(--text-dark);
+        }
+
+        #multiplication-table p {
+            margin: 8px 0;
+            color: var(--text-light);
         }
 
         footer {
@@ -153,6 +172,12 @@
             padding: 20px 0;
             text-align: center;
             margin-top: 40px;
+        }
+
+        footer div {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
         footer a {
@@ -164,6 +189,21 @@
 
         footer a:hover {
             text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-box {
+                width: 100%;
+                margin: 0 10px;
+            }
+            
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -187,67 +227,33 @@
         <h2>Yhteenlasku</h2>
         <input type="number" id="sum1" placeholder="Luku 1">
         <input type="number" id="sum2" placeholder="Luku 2">
-        <button onclick="calculateSum()">Laske</button>
+        <div class="button-group">
+            <button onclick="calculateSum()">Laske</button>
+            <button class="reset-btn" onclick="resetInputs('sum1', 'sum2', 'sum-result')">⟲</button>
+        </div>
         <p id="sum-result">-</p>
-        <!-- Lisää tämä YHTEENLASKU-laskurin diviin -->
-<div class="calculator-box">
-    <h2>Yhteenlasku</h2>
-    <input type="number" id="sum1" placeholder="Luku 1">
-    <input type="number" id="sum2" placeholder="Luku 2">
-    <div style="display: flex; gap: 10px;">
-        <button onclick="calculateSum()" style="flex: 3;">Laske</button>
-        <button onclick="resetInputs('sum1', 'sum2', 'sum-result')" style="flex: 1; background: #f44336;">⟲</button>
-    </div>
-    <p id="sum-result">-</p>
-</div>
-
-<!-- Lisää tämä JavaScriptiin -->
-function resetInputs(...ids) {
-    ids.forEach(id => {
-        const element = document.getElementById(id);
-        if (element.tagName === 'INPUT') element.value = '';
-        else element.textContent = '-';
-    });
-}
     </div>
 
     <!-- Kertolaskutaulukko -->
     <div class="calculator-box">
         <h2>Kertolaskutaulukko</h2>
         <input type="number" id="multiplication-input" placeholder="Luku">
-        <button onclick="generateMultiplicationTable()">Näytä taulukko</button>
+        <div class="button-group">
+            <button onclick="generateMultiplicationTable()">Näytä taulukko</button>
+            <button class="reset-btn" onclick="resetInputs('multiplication-input', 'multiplication-table')">⟲</button>
+        </div>
         <div id="multiplication-table"></div>
     </div>
-    /* Lisää nämä tyylit */
-    
-.calculator-box h2 {
-    border-bottom: 2px solid var(--primary-blue);
-    padding-bottom: 10px;
-    margin-bottom: 15px;
-}
-
-input:focus, select:focus {
-    outline: 2px solid var(--primary-blue);
-    border-color: transparent;
-}
-
-#multiplication-table p {
-    margin: 8px 0;
-    color: var(--text-light);
-}
-
-footer div {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
 
     <!-- Potenssilaskin -->
     <div class="calculator-box">
         <h2>Potenssilaskin</h2>
         <input type="number" id="base" placeholder="Perusluku">
         <input type="number" id="exponent" placeholder="Eksponentti">
-        <button onclick="calculatePower()">Laske</button>
+        <div class="button-group">
+            <button onclick="calculatePower()">Laske</button>
+            <button class="reset-btn" onclick="resetInputs('base', 'exponent', 'power-result')">⟲</button>
+        </div>
         <p id="power-result">-</p>
     </div>
 
@@ -255,7 +261,10 @@ footer div {
     <div class="calculator-box">
         <h2>Neliöjuuri ja kuutiojuuri</h2>
         <input type="number" id="square-root" placeholder="Luku">
-        <button onclick="calculateRoots()">Laske juuret</button>
+        <div class="button-group">
+            <button onclick="calculateRoots()">Laske juuret</button>
+            <button class="reset-btn" onclick="resetInputs('square-root', 'root-result')">⟲</button>
+        </div>
         <p id="root-result">-</p>
     </div>
 
@@ -267,10 +276,11 @@ footer div {
             <option value="circle">Ympyrä</option>
             <option value="cube">Kuutio</option>
         </select>
-        <div id="shape-inputs">
-            <!-- Input-kentät generoidaan dynaamisesti -->
+        <div id="shape-inputs"></div>
+        <div class="button-group">
+            <button onclick="calculateAreaVolume()">Laske</button>
+            <button class="reset-btn" onclick="resetShapeCalculator()">⟲</button>
         </div>
-        <button onclick="calculateAreaVolume()">Laske</button>
         <p id="area-volume-result">-</p>
     </div>
 
@@ -279,10 +289,12 @@ footer div {
         <h2>Peruslaskin</h2>
         <input type="number" id="basic-num1" placeholder="Luku 1">
         <input type="number" id="basic-num2" placeholder="Luku 2">
-        <button onclick="basicCalculator('+')">+</button>
-        <button onclick="basicCalculator('-')">-</button>
-        <button onclick="basicCalculator('*')">*</button>
-        <button onclick="basicCalculator('/')">/</button>
+        <div class="button-group">
+            <button onclick="basicCalculator('+')">+</button>
+            <button onclick="basicCalculator('-')">-</button>
+            <button onclick="basicCalculator('*')">*</button>
+            <button onclick="basicCalculator('/')">/</button>
+        </div>
         <p id="basic-result">-</p>
     </div>
 
@@ -291,27 +303,10 @@ footer div {
         <h2>Pythagoraan laskuri</h2>
         <input type="number" id="side-a" placeholder="Sivu A">
         <input type="number" id="side-b" placeholder="Sivu B">
-        <button onclick=// 
-            Lisää tämä calculateHypotenuse()-funktion alkuun
-function calculateHypotenuse() {
-    const sideA = parseFloat(document.getElementById("side-a").value);
-    const sideB = parseFloat(document.getElementById("side-b").value);
-    
-    if (isNaN(sideA) {
-        document.getElementById("hypotenuse-result").textContent = "Syötä sivu A";
-        document.getElementById("side-a").focus();
-        return;
-    }
-    
-    if (isNaN(sideB)) {
-        document.getElementById("hypotenuse-result").textContent = "Syötä sivu B";
-        document.getElementById("side-b").focus();
-        return;
-    }
-    
-    document.getElementById("hypotenuse-result").textContent = 
-        "Hypotenuusa: " + Math.sqrt(sideA*sideA + sideB*sideB).toFixed(2);
-}"calculateHypotenuse()">Laske hypotenuusa</button>
+        <div class="button-group">
+            <button onclick="calculateHypotenuse()">Laske hypotenuusa</button>
+            <button class="reset-btn" onclick="resetInputs('side-a', 'side-b', 'hypotenuse-result')">⟲</button>
+        </div>
         <p id="hypotenuse-result">-</p>
     </div>
 
@@ -320,7 +315,10 @@ function calculateHypotenuse() {
         <h2>Prosenttilaskuri</h2>
         <input type="number" id="percent-value" placeholder="Prosentti">
         <input type="number" id="percent-base" placeholder="Alkuarvo">
-        <button onclick="calculatePercentage()">Laske prosentti</button>
+        <div class="button-group">
+            <button onclick="calculatePercentage()">Laske prosentti</button>
+            <button class="reset-btn" onclick="resetInputs('percent-value', 'percent-base', 'percent-result')">⟲</button>
+        </div>
         <p id="percent-result">-</p>
     </div>
 
@@ -328,7 +326,10 @@ function calculateHypotenuse() {
     <div class="calculator-box">
         <h2>Keskiarvon laskija</h2>
         <input type="text" id="average-input" placeholder="Syötä arvot pilkulla eroteltuna">
-        <button onclick="calculateAverage()">Laske keskiarvo</button>
+        <div class="button-group">
+            <button onclick="calculateAverage()">Laske keskiarvo</button>
+            <button class="reset-btn" onclick="resetInputs('average-input', 'average-result')">⟲</button>
+        </div>
         <p id="average-result">-</p>
     </div>
 
@@ -336,7 +337,10 @@ function calculateHypotenuse() {
     <div class="calculator-box">
         <h2>Mediaanin laskija</h2>
         <input type="text" id="median-input" placeholder="Syötä arvot pilkulla eroteltuna">
-        <button onclick="calculateMedian()">Laske mediaani</button>
+        <div class="button-group">
+            <button onclick="calculateMedian()">Laske mediaani</button>
+            <button class="reset-btn" onclick="resetInputs('median-input', 'median-result')">⟲</button>
+        </div>
         <p id="median-result">-</p>
     </div>
 </div>
@@ -365,15 +369,40 @@ function calculateHypotenuse() {
         });
     });
 
+    // APUFUNKTIOT
+    function resetInputs(...ids) {
+        ids.forEach(id => {
+            const element = document.getElementById(id);
+            if (element.tagName === 'INPUT') {
+                element.value = '';
+            } else if (element.tagName === 'DIV') {
+                element.innerHTML = '';
+            } else {
+                element.textContent = '-';
+            }
+        });
+    }
+
+    function resetShapeCalculator() {
+        resetInputs('shape-inputs', 'area-volume-result');
+        updateShapeInputs();
+    }
+
     // LASKURIT
     function calculateSum() {
         const num1 = parseFloat(document.getElementById("sum1").value);
         const num2 = parseFloat(document.getElementById("sum2").value);
-        document.getElementById("sum-result").textContent = isNaN(num1) || isNaN(num2) ? "Virheellinen syöte" : (num1 + num2).toFixed(2);
+        document.getElementById("sum-result").textContent = 
+            isNaN(num1) || isNaN(num2) ? "Virheellinen syöte" : (num1 + num2).toFixed(2);
     }
 
     function generateMultiplicationTable() {
         const num = parseInt(document.getElementById("multiplication-input").value);
+        if (isNaN(num)) {
+            document.getElementById("multiplication-table").innerHTML = "<p>Syötä luku</p>";
+            return;
+        }
+        
         let tableHTML = '';
         for (let i = 1; i <= 10; i++) {
             tableHTML += `<p>${num} × ${i} = ${num * i}</p>`;
@@ -384,7 +413,8 @@ function calculateHypotenuse() {
     function calculatePower() {
         const base = parseFloat(document.getElementById("base").value);
         const exponent = parseInt(document.getElementById("exponent").value);
-        document.getElementById("power-result").textContent = isNaN(base) || isNaN(exponent) ? "Virheellinen syöte" : Math.pow(base, exponent).toFixed(2);
+        document.getElementById("power-result").textContent = 
+            isNaN(base) || isNaN(exponent) ? "Virheellinen syöte" : Math.pow(base, exponent).toFixed(2);
     }
 
     function calculateRoots() {
@@ -393,12 +423,14 @@ function calculateHypotenuse() {
             document.getElementById("root-result").textContent = "Virheellinen syöte";
             return;
         }
-        document.getElementById("root-result").textContent = `√${value} = ${Math.sqrt(value).toFixed(2)}, ³√${value} = ${Math.cbrt(value).toFixed(2)}`;
+        document.getElementById("root-result").textContent = 
+            `Neliöjuuri: ${Math.sqrt(value).toFixed(2)}, Kuutiojuuri: ${Math.cbrt(value).toFixed(2)}`;
     }
 
     function updateShapeInputs() {
         const shape = document.getElementById("shape-type").value;
         let html = '';
+        
         if (shape === "rectangle") {
             html = `
                 <input type="number" id="length" placeholder="Pituus">
@@ -409,6 +441,7 @@ function calculateHypotenuse() {
         } else if (shape === "cube") {
             html = `<input type="number" id="side" placeholder="Sivun pituus">`;
         }
+        
         document.getElementById("shape-inputs").innerHTML = html;
     }
 
@@ -416,16 +449,26 @@ function calculateHypotenuse() {
         const shape = document.getElementById("shape-type").value;
         let result = "-";
         
-        if (shape === "rectangle") {
-            const length = parseFloat(document.getElementById("length").value);
-            const width = parseFloat(document.getElementById("width").value);
-            result = isNaN(length) || isNaN(width) ? "Virheellinen syöte" : `Pinta-ala: ${(length * width).toFixed(2)}`;
-        } else if (shape === "circle") {
-            const radius = parseFloat(document.getElementById("radius").value);
-            result = isNaN(radius) ? "Virheellinen syöte" : `Pinta-ala: ${(Math.PI * Math.pow(radius, 2)).toFixed(2)}`;
-        } else if (shape === "cube") {
-            const side = parseFloat(document.getElementById("side").value);
-            result = isNaN(side) ? "Virheellinen syöte" : `Tilavuus: ${Math.pow(side, 3).toFixed(2)}`;
+        try {
+            if (shape === "rectangle") {
+                const length = parseFloat(document.getElementById("length").value);
+                const width = parseFloat(document.getElementById("width").value);
+                if (isNaN(length) throw "Syötä pituus";
+                if (isNaN(width)) throw "Syötä leveys";
+                result = `Pinta-ala: ${(length * width).toFixed(2)}`;
+            } 
+            else if (shape === "circle") {
+                const radius = parseFloat(document.getElementById("radius").value);
+                if (isNaN(radius)) throw "Syötä säde";
+                result = `Pinta-ala: ${(Math.PI * Math.pow(radius, 2)).toFixed(2)}`;
+            } 
+            else if (shape === "cube") {
+                const side = parseFloat(document.getElementById("side").value);
+                if (isNaN(side)) throw "Syötä sivun pituus";
+                result = `Tilavuus: ${Math.pow(side, 3).toFixed(2)}`;
+            }
+        } catch (e) {
+            result = e;
         }
         
         document.getElementById("area-volume-result").textContent = result;
@@ -436,6 +479,18 @@ function calculateHypotenuse() {
         const num2 = parseFloat(document.getElementById("basic-num2").value);
         let result;
         
+        if (isNaN(num1) {
+            document.getElementById("basic-result").textContent = "Syötä luku 1";
+            document.getElementById("basic-num1").focus();
+            return;
+        }
+        
+        if (isNaN(num2)) {
+            document.getElementById("basic-result").textContent = "Syötä luku 2";
+            document.getElementById("basic-num2").focus();
+            return;
+        }
+        
         switch (operator) {
             case '+': result = num1 + num2; break;
             case '-': result = num1 - num2; break;
@@ -444,22 +499,47 @@ function calculateHypotenuse() {
             default: result = "Virhe";
         }
         
-        document.getElementById("basic-result").textContent = typeof result === 'number' ? result.toFixed(2) : result;
+        document.getElementById("basic-result").textContent = 
+            typeof result === 'number' ? result.toFixed(2) : result;
     }
 
     function calculateHypotenuse() {
         const sideA = parseFloat(document.getElementById("side-a").value);
         const sideB = parseFloat(document.getElementById("side-b").value);
+        
+        if (isNaN(sideA)) {
+            document.getElementById("hypotenuse-result").textContent = "Syötä sivu A";
+            document.getElementById("side-a").focus();
+            return;
+        }
+        
+        if (isNaN(sideB)) {
+            document.getElementById("hypotenuse-result").textContent = "Syötä sivu B";
+            document.getElementById("side-b").focus();
+            return;
+        }
+        
         document.getElementById("hypotenuse-result").textContent = 
-            isNaN(sideA) || isNaN(sideB) ? "Virheellinen syöte" : 
-            Math.sqrt(Math.pow(sideA, 2) + Math.pow(sideB, 2)).toFixed(2);
+            "Hypotenuusa: " + Math.sqrt(sideA*sideA + sideB*sideB).toFixed(2);
     }
 
     function calculatePercentage() {
         const percent = parseFloat(document.getElementById("percent-value").value);
         const base = parseFloat(document.getElementById("percent-base").value);
+        
+        if (isNaN(percent)) {
+            document.getElementById("percent-result").textContent = "Syötä prosentti";
+            document.getElementById("percent-value").focus();
+            return;
+        }
+        
+        if (isNaN(base)) {
+            document.getElementById("percent-result").textContent = "Syötä alkuarvo";
+            document.getElementById("percent-base").focus();
+            return;
+        }
+        
         document.getElementById("percent-result").textContent = 
-            isNaN(percent) || isNaN(base) ? "Virheellinen syöte" : 
             ((percent / 100) * base).toFixed(2);
     }
 
@@ -469,11 +549,13 @@ function calculateHypotenuse() {
         
         if (values.length === 0) {
             document.getElementById("average-result").textContent = "Virheellinen syöte";
+            document.getElementById("average-input").focus();
             return;
         }
         
         const sum = values.reduce((a, b) => a + b, 0);
-        document.getElementById("average-result").textContent = (sum / values.length).toFixed(2);
+        document.getElementById("average-result").textContent = 
+            "Keskiarvo: " + (sum / values.length).toFixed(2);
     }
 
     function calculateMedian() {
@@ -482,13 +564,15 @@ function calculateHypotenuse() {
         
         if (values.length === 0) {
             document.getElementById("median-result").textContent = "Virheellinen syöte";
+            document.getElementById("median-input").focus();
             return;
         }
         
         values = values.sort((a, b) => a - b);
         const mid = Math.floor(values.length / 2);
         const median = values.length % 2 !== 0 ? values[mid] : (values[mid - 1] + values[mid]) / 2;
-        document.getElementById("median-result").textContent = median.toFixed(2);
+        document.getElementById("median-result").textContent = 
+            "Mediaani: " + median.toFixed(2);
     }
 
     // Alustetaan muotojen input-kentät
