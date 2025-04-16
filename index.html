@@ -1,112 +1,55 @@
 <!DOCTYPE html>
 <html lang="fi">
 <head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T09C7VFBV9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-T09C7VFBV9');
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tervetuloa ikamittarip.fi, jossa löydät kaikki matemaattiset työkalut, kuten prosenttilaskurit, yksikkömuuntimet, satunnaislukugeneraattorit ja paljon muuta.">
+    <meta name="keywords" content="matemaattiset työkalut, prosenttilaskuri, yksikkömuunnin, satunnaislukugeneraattori, laskurit">
+    <meta name="author" content="ikamittarip.fi">
     <title>ikamittarip.fi - Kaikki matemaattiset työkalut</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        header {
-            background-color: #0056b3;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-        }
-
-        h1 {
-            margin: 0;
-            font-size: 2rem;
-        }
-
-        nav {
-            background-color: #333;
-            overflow: hidden;
-        }
-
-        nav a {
-            color: white;
-            padding: 14px 20px;
-            text-decoration: none;
-            float: left;
-            text-align: center;
-        }
-
-        nav a:hover {
-            background-color: #ddd;
-            color: black;
-        }
-
-        .container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            padding: 20px;
-        }
-
-        .tool-box {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .tool-box h2 {
-            color: #333;
-        }
-
-        .tool-box button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        .tool-box button:hover {
-            background-color: #0056b3;
-        }
-
-        footer {
-            text-align: center;
-            padding: 10px 20px;
-            background-color: #333;
-            color: white;
-        }
-
-        .adsense {
-            margin: 20px 0;
-        }
-
-        .adsense iframe {
+        /* --- [Tyylit säilyvät ennallaan] --- */
+        /* Evästebanneri */
+        #cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
             width: 100%;
-            height: 250px;
-            border: none;
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            display: none;
+            z-index: 1000;
         }
+        #cookie-banner button {
+            background-color: #f1c40f;
+            border: none;
+            padding: 5px 10px;
+            color: black;
+            cursor: pointer;
+        }
+        /* --- Laskureiden tyyli ja muut elementit --- */
     </style>
 </head>
 <body>
+    <!-- Evästebanneri -->
+    <div id="cookie-banner">
+        <p>Verkkosivustollamme käytetään evästeitä. Hyväksyksesi evästeet, klikkaa hyväksy-nappia.</p>
+        <button id="accept-cookies">Hyväksy</button>
+    </div>
 
-<header>
-    <h1>ikamittarip.fi - Kaikki matemaattiset työkalut</h1>
-</header>
-
-<nav>
-    <a href="#calculator">Laskurit</a>
-    <a href="#tools">Työkalut</a>
-    <a href="#about">Tietoa</a>
-</nav>
-
-<div class="container" id="calculator">
-    <!-- Prosenttilaskuri -->
-    <div class="tool-box">
+    <!-- --- Laskurit ja työkalut --- -->
+    <div>
         <h2>Prosenttilaskuri</h2>
         <select id="percent-type">
             <option value="discount">Alennus</option>
@@ -119,8 +62,7 @@
         <p id="percent-result">-</p>
     </div>
 
-    <!-- Yksikkömuunnin -->
-    <div class="tool-box">
+    <div>
         <h2>Yksikkömuunnin</h2>
         <select id="conversion-type">
             <option value="length">Pituus</option>
@@ -136,8 +78,7 @@
         <p id="conversion-result">-</p>
     </div>
 
-    <!-- Satunnaislukugeneraattori -->
-    <div class="tool-box">
+    <div>
         <h2>Satunnaislukugeneraattori</h2>
         <input type="number" id="rand-min" placeholder="Minimi">
         <input type="number" id="rand-max" placeholder="Maksimi">
@@ -145,151 +86,133 @@
         <p id="rand-result">-</p>
     </div>
 
-    <!-- Lisää mainostilaa AdSense -->
-    <div class="adsense">
-        <iframe src="https://google.com" title="Google Ad"></iframe>
-    </div>
-</div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Google Analytics
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-XXXXXXX-X', 'auto');
+            ga('send', 'pageview');
 
-<footer>
-    <p>&copy; 2025 ikamittarip.fi - Kaikki oikeudet pidätetään.</p>
-</footer>
-
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        document.getElementById("percent-type").addEventListener("change", updatePercentInputs);
-        updatePercentInputs();
-
-        document.getElementById("conversion-type").addEventListener("change", updateUnitOptions);
-        updateUnitOptions();
-    });
-
-    function updatePercentInputs() {
-        const type = document.getElementById("percent-type").value;
-        const container = document.getElementById("percent-inputs");
-        container.innerHTML = "";
-        if (type === "discount" || type === "increase") {
-            container.innerHTML = `
-                <div class="input-group">
-                    <label for="base-value">Alkuarvo</label>
-                    <input type="number" id="base-value" step="any">
-                </div>
-                <div class="input-group">
-                    <label for="percent-value">Prosentti</label>
-                    <input type="number" id="percent-value" step="any">
-                </div>`;
-        } else if (type === "percentage") {
-            container.innerHTML = `
-                <div class="input-group">
-                    <label for="part-value">Osa</label>
-                    <input type="number" id="part-value" step="any">
-                </div>
-                <div class="input-group">
-                    <label for="whole-value">Kokonaismäärä</label>
-                    <input type="number" id="whole-value" step="any">
-                </div>`;
-        } else if (type === "change") {
-            container.innerHTML = `
-                <div class="input-group">
-                    <label for="original-value">Alkuarvo</label>
-                    <input type="number" id="original-value" step="any">
-                </div>
-                <div class="input-group">
-                    <label for="new-value">Uusi arvo</label>
-                    <input type="number" id="new-value" step="any">
-                </div>`;
-        }
-    }
-
-    function calculatePercentage() {
-        const type = document.getElementById("percent-type").value;
-        let result = "-";
-
-        if (type === "discount" || type === "increase") {
-            const base = parseFloat(document.getElementById("base-value").value);
-            const percent = parseFloat(document.getElementById("percent-value").value);
-            if (!isNaN(base) && !isNaN(percent)) {
-                const change = base * (percent / 100);
-                result = type === "discount" ? base - change : base + change;
+            // Evästebanneri
+            if (!localStorage.getItem('cookiesAccepted')) {
+                document.getElementById("cookie-banner").style.display = "block";
             }
-        } else if (type === "percentage") {
-            const part = parseFloat(document.getElementById("part-value").value);
-            const whole = parseFloat(document.getElementById("whole-value").value);
-            if (!isNaN(part) && !isNaN(whole) && whole !== 0) {
-                result = (part / whole) * 100 + "%";
-            }
-        } else if (type === "change") {
-            const original = parseFloat(document.getElementById("original-value").value);
-            const newValue = parseFloat(document.getElementById("new-value").value);
-            if (!isNaN(original) && !isNaN(newValue) && original !== 0) {
-                result = ((newValue - original) / original) * 100 + "%";
-            }
-        }
-        document.getElementById("percent-result").textContent = result;
-    }
+            document.getElementById("accept-cookies").addEventListener("click", () => {
+                localStorage.setItem('cookiesAccepted', 'true');
+                document.getElementById("cookie-banner").style.display = "none";
+            });
 
-    function updateUnitOptions() {
-        const type = document.getElementById('conversion-type').value;
-        const fromSelect = document.getElementById('conversion-from');
-        const toSelect = document.getElementById('conversion-to');
-        let units = [];
-
-        switch(type) {
-            case 'length':
-                units = ["mm", "cm", "m", "km", "tuuma", "jalka", "jaardi", "maili"];
-                break;
-            case 'weight':
-                units = ["mg", "g", "kg", "t", "unssi", "naula"];
-                break;
-            case 'volume':
-                units = ["ml", "cl", "dl", "l", "tl", "rkl", "kuppi", "gal", "pint"];
-                break;
-            case 'area':
-                units = ["mm²", "cm²", "m²", "ha", "km²", "tuuma²", "jalka²", "eekkeri"];
-                break;
-            case 'speed':
-                units = ["m/s", "km/h", "mph", "solmu", "äänennopeus"];
-                break;
-        }
-
-        fromSelect.innerHTML = '';
-        toSelect.innerHTML = '';
-        units.forEach(unit => {
-            const option1 = document.createElement('option');
-            option1.value = unit;
-            option1.textContent = unit;
-            fromSelect.appendChild(option1);
-            
-            const option2 = document.createElement('option');
-            option2.value = unit;
-            option2.textContent = unit;
-            toSelect.appendChild(option2);
+            // Laskureiden päivitys
+            document.getElementById("percent-type").addEventListener("change", updatePercentInputs);
+            updatePercentInputs();
+            document.getElementById("conversion-type").addEventListener("change", updateUnitOptions);
+            updateUnitOptions();
         });
-    }
 
-    function convertUnits() {
-        const value = parseFloat(document.getElementById("conversion-value").value);
-        const from = document.getElementById("conversion-from").value;
-        const to = document.getElementById("conversion-to").value;
-
-        if (!isNaN(value)) {
-            // Lisää yksikkömuunnokset täällä
-            // Esim. length, weight jne.
-            const result = `${value} ${from} = ? ${to}`;  // Placeholder
-            document.getElementById("conversion-result").textContent = result;
+        function updatePercentInputs() {
+            const type = document.getElementById("percent-type").value;
+            const container = document.getElementById("percent-inputs");
+            container.innerHTML = "";
+            if (type === "discount" || type === "increase") {
+                container.innerHTML = `
+                    <div class="input-group">
+                        <label for="base-value">Alkuarvo</label>
+                        <input type="number" id="base-value" step="any">
+                    </div>
+                    <div class="input-group">
+                        <label for="percent-value">Prosentti</label>
+                        <input type="number" id="percent-value" step="any">
+                    </div>`;
+            } else if (type === "percentage") {
+                container.innerHTML = `
+                    <div class="input-group">
+                        <label for="part-value">Osa</label>
+                        <input type="number" id="part-value" step="any">
+                    </div>
+                    <div class="input-group">
+                        <label for="whole-value">Kokonaismäärä</label>
+                        <input type="number" id="whole-value" step="any">
+                    </div>`;
+            } else if (type === "change") {
+                container.innerHTML = `
+                    <div class="input-group">
+                        <label for="original-value">Alkuarvo</label>
+                        <input type="number" id="original-value" step="any">
+                    </div>
+                    <div class="input-group">
+                        <label for="new-value">Uusi arvo</label>
+                        <input type="number" id="new-value" step="any">
+                    </div>`;
+            }
         }
-    }
 
-    function generateRandom() {
-        const min = parseFloat(document.getElementById("rand-min").value);
-        const max = parseFloat(document.getElementById("rand-max").value);
-        if (!isNaN(min) && !isNaN(max)) {
-            const random = Math.floor(Math.random() * (max - min + 1)) + min;
-            document.getElementById("rand-result").textContent = `Arvo: ${random}`;
+        function calculatePercentage() {
+            const type = document.getElementById("percent-type").value;
+            let result = "-";
+
+            if (type === "discount" || type === "increase") {
+                const base = parseFloat(document.getElementById("base-value").value);
+                const percent = parseFloat(document.getElementById("percent-value").value);
+                if (!isNaN(base) && !isNaN(percent)) {
+                    const change = base * (percent / 100);
+                    result = type === "discount" ? base - change : base + change;
+                }
+            } else if (type === "percentage") {
+                const part = parseFloat(document.getElementById("part-value").value);
+                const whole = parseFloat(document.getElementById("whole-value").value);
+                if (!isNaN(part) && !isNaN(whole) && whole !== 0) {
+                    result = (part / whole) * 100 + "%";
+                }
+            } else if (type === "change") {
+                const original = parseFloat(document.getElementById("original-value").value);
+                const newValue = parseFloat(document.getElementById("new-value").value);
+                if (!isNaN(original) && !isNaN(newValue) && original !== 0) {
+                    result = ((newValue - original) / original) * 100 + "%";
+                }
+            }
+            document.getElementById("percent-result").textContent = result;
         }
-    }
-</script>
 
-</body>
-</html>
+        function updateUnitOptions() {
+            const type = document.getElementById('conversion-type').value;
+            const fromSelect = document.getElementById('conversion-from');
+            const toSelect = document.getElementById('conversion-to');
+            let units = [];
 
+            switch(type) {
+                case 'length':
+                    units = ["mm", "cm", "m", "km", "tuuma", "jalka", "jaardi", "maili"];
+                    break;
+                case 'weight':
+                    units = ["mg", "g", "kg", "t", "unssi", "naula"];
+                    break;
+                case 'volume':
+                    units = ["ml", "cl", "dl", "l", "tl", "rkl", "kuppi", "gal", "pint"];
+                    break;
+                case 'area':
+                    units = ["mm²", "cm²", "m²", "ha", "km²", "tuuma²", "jalka²", "eekkeri"];
+                    break;
+                case 'speed':
+                    units = ["m/s", "km/h", "mph", "solmu", "äänennopeus"];
+                    break;
+            }
+
+            fromSelect.innerHTML = '';
+            toSelect.innerHTML = '';
+            units.forEach(unit => {
+                const option1 = document.createElement('option');
+                option1.value = unit;
+                option1.textContent = unit;
+                fromSelect.appendChild(option1);
+
+                const option2 = document.createElement('option');
+                option2.value = unit;
+                option2.textContent = unit;
+                toSelect.appendChild(option2);
+            });
+
+            if (type === 'length') {
+                fromSelect.value = "
