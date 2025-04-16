@@ -136,3 +136,123 @@
     </script>
 </body>
 </html>
+<!-- Lisää tämä index.html-tiedostoosi -->
+<div class="calculator">
+    <h2>Neliöjuuri</h2>
+    <input type="number" id="sqrt-input" placeholder="Luku (≥ 0)">
+    <button onclick="calculateSqrt()">Laske</button>
+    <p>Tulos: <span class="result" id="sqrt-result">-</span></p>
+</div>
+
+<script>
+    // Lisää tämä script-osioon (mukaan lukien avaava ja sulkeva script-tagi, jos ei jo ole)
+    function calculateSqrt() {
+        const num = parseFloat(document.getElementById('sqrt-input').value);
+        if (num < 0) {
+            document.getElementById('sqrt-result').textContent = "Virhe: negatiivinen luku";
+        } else {
+            document.getElementById('sqrt-result').textContent = Math.sqrt(num).toFixed(2);
+        }
+    }
+</script>
+<div class="calculator">
+    <h2>Ympyrän pinta-ala</h2>
+    <input type="number" id="radius" placeholder="Säde (r)">
+    <button onclick="calculateCircleArea()">Laske</button>
+    <p>Pinta-ala: <span class="result" id="circle-area-result">-</span> π</p>
+</div>
+
+<script>
+    function calculateCircleArea() {
+        const r = parseFloat(document.getElementById('radius').value);
+        document.getElementById('circle-area-result').textContent = (r * r).toFixed(2);
+    }
+</script>
+<div class="calculator" style="margin-top: 30px;">
+    <h2>Trigonometrian laskuri</h2>
+    
+    <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+        <!-- Kulman syöttö -->
+        <div>
+            <h3>Kulma (θ)</h3>
+            <input type="number" id="trig-angle" placeholder="Astetta" min="0" max="360" step="0.1">
+            <button onclick="calculateTrig()">Laske</button>
+        </div>
+        
+        <!-- Tulokset -->
+        <div>
+            <h3>Arvot</h3>
+            <p>sin(θ) = <span class="result" id="sin-result">-</span></p>
+            <p>cos(θ) = <span class="result" id="cos-result">-</span></p>
+            <p>tan(θ) = <span class="result" id="tan-result">-</span></p>
+        </div>
+        
+        <!-- Yksikköympyrä (CSS-animaatio) -->
+        <div style="position: relative; width: 150px; height: 150px;">
+            <svg width="150" height="150" viewBox="0 0 150 150">
+                <circle cx="75" cy="75" r="70" fill="#f8f9fa" stroke="#2c3e50"/>
+                <line x1="75" y1="75" x2="145" y2="75" stroke="#7f8c8d" stroke-width="1"/>
+                <line x1="75" y1="75" x2="75" y2="5" stroke="#7f8c8d" stroke-width="1"/>
+                <path id="trig-circle-line" d="M75 75 L75 75" stroke="#e74c3c" stroke-width="2"/>
+                <circle id="trig-circle-point" cx="75" cy="75" r="3" fill="#e74c3c" opacity="0"/>
+            </svg>
+        </div>
+    </div>
+</div>
+function calculateTrig() {
+    // Hae kulma asteina ja muunna radiaaneiksi
+    const angleDeg = parseFloat(document.getElementById('trig-angle').value);
+    const angleRad = angleDeg * (Math.PI / 180);
+    
+    // Laske trigonometriset funktiot
+    const sinValue = Math.sin(angleRad).toFixed(4);
+    const cosValue = Math.cos(angleRad).toFixed(4);
+    let tanValue = Math.tan(angleRad).toFixed(4);
+    
+    // Korjaa tangentin ääriarvot
+    if (angleDeg % 90 === 0 && angleDeg % 180 !== 0) {
+        tanValue = "∞";
+    }
+    
+    // Päivitä tulokset
+    document.getElementById('sin-result').textContent = sinValue;
+    document.getElementById('cos-result').textContent = cosValue;
+    document.getElementById('tan-result').textContent = tanValue;
+    
+    // Animaatio yksikköympyrälle
+    updateUnitCircle(angleDeg);
+}
+
+function updateUnitCircle(angleDeg) {
+    const angleRad = angleDeg * (Math.PI / 180);
+    const centerX = 75;
+    const centerY = 75;
+    const radius = 70;
+    
+    // Laske pisteen sijainti ympyrällä
+    const pointX = centerX + radius * Math.cos(angleRad);
+    const pointY = centerY - radius * Math.sin(angleRad); // Y-akseli on käänteinen SVG:ssä
+    
+    // Päivitä viiva ja piste
+    document.getElementById('trig-circle-line').setAttribute("d", 
+        `M${centerX} ${centerY} L${pointX} ${pointY}`);
+    document.getElementById('trig-circle-point').setAttribute("cx", pointX);
+    document.getElementById('trig-circle-point').setAttribute("cy", pointY);
+    document.getElementById('trig-circle-point').style.opacity = "1";
+}
+/* Lisää tähän osaan jos haluat muokata ulkoasua */
+.calculator h3 {
+    margin-top: 0;
+    color: #3498db;
+    font-size: 1.1em;
+}
+
+input[type="number"] {
+    width: 100px;
+}
+
+svg {
+    border: 1px solid #eee;
+    border-radius: 50%;
+    background-color: white;
+}
