@@ -3,209 +3,271 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matikkatyökalut</title>
+    <title>ikamittarip.fi - Kaikki matemaattiset työkalut</title>
     <style>
+        /* Yhtenäinen väriteema ja responsiivisuus */
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f4f7fc;
+            background-color: #f4f4f9;
             margin: 0;
             padding: 0;
-            color: #333;
+            box-sizing: border-box;
         }
 
-        h2 {
-            color: #4a90e2;
+        header {
+            background-color: #0056b3;
+            color: white;
+            padding: 10px 20px;
             text-align: center;
-            margin-top: 20px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        nav a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            float: left;
+            text-align: center;
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
         }
 
         .container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 20px;
-            max-width: 1200px;
-            margin: 20px auto;
             padding: 20px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .calculator-box {
-            background-color: #ffffff;
-            border-radius: 8px;
+        .tool-box {
+            background-color: #fff;
             padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        .calculator-box:hover {
-            transform: translateY(-5px);
+        .tool-box h2 {
+            color: #333;
         }
 
-        .input-group {
-            margin-bottom: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .input-group input {
-            padding: 10px;
-            font-size: 1rem;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            transition: border-color 0.3s ease;
-        }
-
-        .input-group input:focus {
-            border-color: #4a90e2;
-            outline: none;
-        }
-
-        .input-group button {
-            padding: 10px;
-            font-size: 1rem;
-            background-color: #4a90e2;
+        .tool-box button {
+            background-color: #007bff;
             color: white;
             border: none;
-            border-radius: 5px;
+            padding: 10px 20px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .input-group button:hover {
-            background-color: #357ab7;
-        }
-
-        .result {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #333;
-            text-align: center;
-            padding: 10px;
-            margin-top: 10px;
-            background-color: #e9f4ff;
             border-radius: 5px;
         }
 
-        .result.error {
-            background-color: #f8d7da;
-            color: #842029;
+        .tool-box button:hover {
+            background-color: #0056b3;
         }
 
-        .input-group p {
-            margin: 0;
-            padding: 5px 0;
+        footer {
             text-align: center;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
         }
+
+        .adsense {
+            margin: 20px 0;
+        }
+
+        .adsense iframe {
+            width: 100%;
+            height: 250px;
+            border: none;
+        }
+
+        @media (max-width: 768px) {
+            nav a {
+                float: none;
+                display: block;
+                text-align: left;
+            }
+        }
+
     </style>
 </head>
 <body>
-    <h2>Matikkatyokalut</h2>
-    <div class="container">
-        <div class="calculator-box">
-            <h3>Yhteenlasku/Laskin</h3>
-            <div class="input-group">
-                <input type="number" id="sum-value1" placeholder="Luku 1">
-                <input type="number" id="sum-value2" placeholder="Luku 2">
-                <button onclick="addNumbers()">Laske yhteen</button>
-                <p id="sum-result" class="result">-</p>
-            </div>
-        </div>
 
-        <div class="calculator-box">
-            <h3>Kertolaskutaulukko</h3>
-            <div class="input-group">
-                <input type="number" id="multiplication-table" placeholder="Numero">
-                <button onclick="generateMultiplicationTable()">Generoi taulukko</button>
-                <p id="multiplication-table-result" class="result">-</p>
-            </div>
-        </div>
+<header>
+    <h1>ikamittarip.fi - Kaikki matemaattiset työkalut</h1>
+</header>
 
-        <div class="calculator-box">
-            <h3>Potenssilaskin</h3>
-            <div class="input-group">
-                <input type="number" id="base-number" placeholder="Perusluku">
-                <input type="number" id="exponent" placeholder="Eksponentti">
-                <button onclick="calculatePower()">Laske potenssi</button>
-                <p id="power-result" class="result">-</p>
-            </div>
-        </div>
+<nav>
+    <a href="#calculator">Laskurit</a>
+    <a href="#tools">Työkalut</a>
+    <a href="#about">Tietoa</a>
+</nav>
 
-        <div class="calculator-box">
-            <h3>Neliöjuuri- ja kuutiojuurilaskin</h3>
-            <div class="input-group">
-                <input type="number" id="square-root-value" placeholder="Luku">
-                <button onclick="calculateSquareRoot()">Laske neliöjuuri</button>
-                <p id="square-root-result" class="result">-</p>
-                <input type="number" id="cube-root-value" placeholder="Luku">
-                <button onclick="calculateCubeRoot()">Laske kuutiojuuri</button>
-                <p id="cube-root-result" class="result">-</p>
-            </div>
-        </div>
-
-        <div class="calculator-box">
-            <h3>Pinta-alan ja tilavuuden laskimet</h3>
-            <h4>Suorakulmio</h4>
-            <div class="input-group">
-                <input type="number" id="rect-length" placeholder="Pituus">
-                <input type="number" id="rect-width" placeholder="Leveys">
-                <button onclick="calculateRectangleArea()">Laske pinta-ala</button>
-                <p id="rectangle-area" class="result">-</p>
-            </div>
-
-            <h4>Ympyrä</h4>
-            <div class="input-group">
-                <input type="number" id="circle-radius" placeholder="Säde">
-                <button onclick="calculateCircleArea()">Laske pinta-ala</button>
-                <p id="circle-area" class="result">-</p>
-            </div>
-        </div>
-
-        <div class="calculator-box">
-            <h3>Peruslaskin</h3>
-            <div class="input-group">
-                <input type="number" id="basic-value1" placeholder="Luku 1">
-                <input type="number" id="basic-value2" placeholder="Luku 2">
-                <button onclick="calculateBasicMath()">Laske</button>
-                <p id="basic-math-result" class="result">-</p>
-            </div>
-        </div>
-
-        <div class="calculator-box">
-            <h3>Pythagoraan laskuri</h3>
-            <div class="input-group">
-                <input type="number" id="pythagoras-side1" placeholder="Sivu 1">
-                <input type="number" id="pythagoras-side2" placeholder="Sivu 2">
-                <button onclick="calculatePythagoras()">Laske hypotenuusa</button>
-                <p id="pythagoras-result" class="result">-</p>
-            </div>
-        </div>
-
-        <div class="calculator-box">
-            <h3>Prosenttiluvun lasku erissä</h3>
-            <div class="input-group">
-                <input type="number" id="principal-amount" placeholder="Pääoma">
-                <input type="number" id="interest-rate" placeholder="Korko">
-                <input type="number" id="time-period" placeholder="Aika (vuosina)">
-                <button onclick="calculateCompoundInterest()">Laske korkoa korolle</button>
-                <p id="compound-interest-result" class="result">-</p>
-            </div>
-        </div>
-
-        <div class="calculator-box">
-            <h3>Keskiarvon ja mediaanin laskija</h3>
-            <div class="input-group">
-                <input type="text" id="numbers-input" placeholder="Syötä luvut pilkulla erotettuna">
-                <button onclick="calculateMeanMedian()">Laske keskiarvo ja mediaani</button>
-                <p id="mean-median-result" class="result">-</p>
-            </div>
-        </div>
+<div class="container" id="calculator">
+    <!-- Prosenttilaskuri -->
+    <div class="tool-box">
+        <h2>Prosenttilaskuri</h2>
+        <select id="percent-type">
+            <option value="discount">Alennus</option>
+            <option value="increase">Korotus</option>
+            <option value="percentage">Kuinka monta prosenttia</option>
+            <option value="change">Prosentuaalinen muutos</option>
+        </select>
+        <div id="percent-inputs"></div>
+        <button onclick="calculatePercentage()">Laske</button>
+        <p id="percent-result">-</p>
     </div>
 
-    <script>
-        // Funktiot jäävät ennalleen
-    </script>
-</body>
-</html>
+    <!-- Yksikkömuunnin -->
+    <div class="tool-box">
+        <h2>Yksikkömuunnin</h2>
+        <select id="conversion-type">
+            <option value="length">Pituus</option>
+            <option value="weight">Paino</option>
+            <option value="volume">Tilavuus</option>
+            <option value="area">Pinta-ala</option>
+            <option value="speed">Nopeus</option>
+        </select>
+        <input type="number" id="conversion-value" placeholder="Arvo" step="any">
+        <select id="conversion-from"></select>
+        <select id="conversion-to"></select>
+        <button onclick="convertUnits()">Muunna</button>
+        <p id="conversion-result">-</p>
+    </div>
+
+    <!-- Satunnaislukugeneraattori -->
+    <div class="tool-box">
+        <h2>Satunnaislukugeneraattori</h2>
+        <input type="number" id="rand-min" placeholder="Minimi">
+        <input type="number" id="rand-max" placeholder="Maksimi">
+        <button onclick="generateRandom()">Arvo</button>
+        <p id="rand-result">-</p>
+    </div>
+
+    <!-- Lisää mainostilaa AdSense -->
+    <div class="adsense">
+        <iframe src="https://google.com" title="Google Ad"></iframe>
+    </div>
+
+</div>
+
+<footer>
+    <p>&copy; 2025 ikamittarip.fi - Kaikki oikeudet pidätetään.</p>
+</footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("percent-type").addEventListener("change", updatePercentInputs);
+        updatePercentInputs();
+
+        document.getElementById("conversion-type").addEventListener("change", updateUnitOptions);
+        updateUnitOptions();
+    });
+
+    function updatePercentInputs() {
+        const type = document.getElementById("percent-type").value;
+        const container = document.getElementById("percent-inputs");
+        container.innerHTML = "";
+        if (type === "discount" || type === "increase") {
+            container.innerHTML = `
+                <div class="input-group">
+                    <label for="base-value">Alkuarvo</label>
+                    <input type="number" id="base-value" step="any">
+                </div>
+                <div class="input-group">
+                    <label for="percent-value">Prosentti</label>
+                    <input type="number" id="percent-value" step="any">
+                </div>`;
+        } else if (type === "percentage") {
+            container.innerHTML = `
+                <div class="input-group">
+                    <label for="part-value">Osa</label>
+                    <input type="number" id="part-value" step="any">
+                </div>
+                <div class="input-group">
+                    <label for="whole-value">Kokonaismäärä</label>
+                    <input type="number" id="whole-value" step="any">
+                </div>`;
+        } else if (type === "change") {
+            container.innerHTML = `
+                <div class="input-group">
+                    <label for="original-value">Alkuarvo</label>
+                    <input type="number" id="original-value" step="any">
+                </div>
+                <div class="input-group">
+                    <label for="new-value">Uusi arvo</label>
+                    <input type="number" id="new-value" step="any">
+                </div>`;
+        }
+    }
+
+    function calculatePercentage() {
+        const type = document.getElementById("percent-type").value;
+        let result = "-";
+
+        if (type === "discount" || type === "increase") {
+            const base = parseFloat(document.getElementById("base-value").value);
+            const percent = parseFloat(document.getElementById("percent-value").value);
+            if (!isNaN(base) && !isNaN(percent)) {
+                const change = base * (percent / 100);
+                result = type === "discount" ? base - change : base + change;
+            }
+        } else if (type === "percentage") {
+            const part = parseFloat(document.getElementById("part-value").value);
+            const whole = parseFloat(document.getElementById("whole-value").value);
+            if (!isNaN(part) && !isNaN(whole) && whole !== 0) {
+                result = (part / whole) * 100 + "%";
+            }
+        } else if (type === "change") {
+            const original = parseFloat(document.getElementById("original-value").value);
+            const newValue = parseFloat(document.getElementById("new-value").value);
+            if (!isNaN(original) && !isNaN(newValue) && original !== 0) {
+                result = ((newValue - original) / original) * 100 + "%";
+            }
+        }
+        document.getElementById("percent-result").textContent = result;
+    }
+
+    function updateUnitOptions() {
+        const type = document.getElementById('conversion-type').value;
+        const fromSelect = document.getElementById('conversion-from');
+        const toSelect = document.getElementById('conversion-to');
+        let units = [];
+
+        switch(type) {
+            case 'length':
+                units = ["mm", "cm", "m", "km", "tuuma", "jalka", "jaardi", "maili"];
+                break;
+            case 'weight':
+                units = ["mg", "g", "kg", "t", "unssi", "naula"];
+                break;
+            case 'volume':
+                units = ["ml", "cl", "dl", "l", "tl", "rkl", "kuppi", "gal", "pint"];
+                break;
+            case 'area':
+                units = ["mm²", "cm²", "m²", "ha", "km²", "tuuma²", "jalka²", "eekkeri"];
+                break;
+            case 'speed':
+                units = ["m/s", "km/h", "mph", "solmu", "äänennopeus"];
+                break;
+        }
+
+        fromSelect.innerHTML = '';
+        toSelect.innerHTML = '';
+        units.forEach(unit => {
+            const option1 = document.createElement('option');
+            option1.value = unit;
+            option1.textContent = unit;
+            fromSelect.appendChild
+
