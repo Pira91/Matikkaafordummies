@@ -1,24 +1,17 @@
 <!DOCTYPE html>
 <html lang="fi">
 <head>
-    <script src="https://web.cmp.usercentrics.eu/modules/autoblocker.js"></script>
-<script id="usercentrics-cmp" src="https://web.cmp.usercentrics.eu/ui/loader.js" data-settings-id="lbbJzQKO0YzyXH" async></script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T09C7VFBV9"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-T09C7VFBV9', {
-            'anonymize_ip': true,
-            'allow_google_signals': false
-        });
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Tervetuloa ikamittarip.fi, jossa löydät kaikki matemaattiset laskurit yhdessä paikassa">
     <meta name="keywords" content="matemaattiset työkalut, prosenttilaskuri, yksikkömuunnin, satunnaislukugeneraattori, laskurit, yksikkömuuntimet, trigonometria, geometria, trivia, selvitä, selvitä nopeasti, apua opiskeluun, helpotusta arkeen, matikka, math, solving, etsiminen">
     <meta name="author" content="ikamittarip.fi">
-    <title>Laskureita joka lähtöön! </title>
+    <title>Laskureita joka lähtöön!</title>
+
+    <!-- Usercentrics: suostumushallinta -->
+    <script src="https://web.cmp.usercentrics.eu/modules/autoblocker.js"></script>
+    <script id="usercentrics-cmp" src="https://web.cmp.usercentrics.eu/ui/loader.js" data-settings-id="lbbJzQKO0YzyXH" async></script>
+
     <style>
         :root {
             --primary-blue: #1a73e8;
@@ -48,93 +41,9 @@
             color: var(--white);
             padding: 20px 0;
             text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-
-        #cookie-banner {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: var(--dark-blue);
-            color: var(--white);
-            padding: 15px 0;
-            text-align: center;
-            display: none;
-            z-index: 1000;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
-        }
-
-        #cookie-banner p {
-            margin: 0 auto 10px;
-            max-width: 800px;
-            padding: 0 20px;
-        }
-
-        #cookie-banner a {
-            color: #f1c40f;
-            text-decoration: underline;
-        }
-
-        #accept-cookies {
-            background-color: var(--white);
-            color: var(--primary-blue);
-            border: none;
-            padding: 8px 20px;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-
-        .container {
-            display: flex;
-            flex-grow: 1;
-            max-width: 1200px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
-
-        nav {
-            width: 200px;
-            padding-right: 20px;
-            border-right: 1px solid var(--light-gray);
-        }
-
-        nav h2 {
-            color: var(--primary-blue);
-            margin-top: 0;
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--primary-blue);
-            margin-bottom: 15px;
-        }
-
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        nav ul li {
-            margin-bottom: 10px;
-        }
-
-        nav a {
-            display: block;
-            padding: 10px 15px;
-            color: var(--text-dark);
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.2s;
-        }
-
-        nav a:hover {
-            background-color: var(--light-blue);
-        }
-
-        main {
-            flex-grow: 1;
-            padding-left: 20px;
-        }
+    </style>
+</head>
 
         .calculator-box {
             background-color: var(--white);
