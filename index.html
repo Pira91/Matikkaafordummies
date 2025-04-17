@@ -7,6 +7,33 @@
     <meta name="keywords" content="matemaattiset työkalut, prosenttilaskuri, yksikkömuunnin, satunnaislukugeneraattori, laskurit, yksikkömuuntimet, trigonometria, geometria">
     <meta name="author" content="ikamittarip.fi">
     <title>Laskureita joka lähtöön!</title>
+    <script>
+  // Lataa Google Analytics VAIN jos evästeet on hyväksytty
+  function loadGA() {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-T09C7VFBV9'); // KORVAA OMILLA TIEDOILLASI
+    
+    const gaScript = document.createElement('script');
+    gaScript.async = true;
+    gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-T09C7VFBV9'; // KORVAA
+    document.head.appendChild(gaScript);
+    console.log('Google Analytics ladattu');
+  }
+
+  // Tarkista onko evästeet hyväksytty sivun latauksen yhteydessä
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+
+  // Jos evästeet on jo hyväksytty, lataa GA välittömästi
+  if (getCookie('cookies_accepted') === 'true') {
+    loadGA();
+  }
+</script>
     <style>
         :root {
             --primary-blue: #1a73e8;
@@ -1291,6 +1318,18 @@
         updateTimeInputs();
         showCalculator('yhteenlasku');
     });
+    document.getElementById('accept-cookies').addEventListener('click', function() {
+  // Aseta eväste joka vanhenee 1 vuoden päästä
+  const expiryDate = new Date();
+  expiryDate.setFullYear(expiryDate.getFullYear() + 1);
+  document.cookie = `cookies_accepted=true; expires=${expiryDate.toUTCString()}; path=/; SameSite=Lax`;
+  
+  // Piilota banneri
+  document.getElementById('cookie-banner').style.display = 'none';
+  
+  // Lataa Google Analytics
+  loadGA();
+});
 </script>
 </body>
 </html>
