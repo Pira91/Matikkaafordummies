@@ -628,11 +628,21 @@
         });
     }
 
-    // Alusta Klaro kun sivu latautuu
-    document.addEventListener('DOMContentLoaded', function() {
-        updateShapeInputs();
-        showCalculator('yhteenlasku');
-        
+  // Määrittele kaikki tarvittavat funktiot ENSIN
+function updateShapeInputs() {
+    // Päivitä geometrisyötteet
+}
+
+function showCalculator(tyyppi) {
+    // Vaihda aktiivista laskuria
+    console.log("Laskuri:", tyyppi);
+}
+
+// Suorita kun DOM on valmis
+document.addEventListener('DOMContentLoaded', function() {
+    updateShapeInputs();
+    showCalculator('yhteenlasku'); // Oletusarvoinen laskuri
+});
         // Näytä evästebanneri automaattisesti
         setTimeout(() => {
             if (typeof klaro !== 'undefined') {
