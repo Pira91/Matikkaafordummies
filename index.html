@@ -11,7 +11,7 @@
     <!-- KLARO - EVÄSTEBANNERI -->
     <script>
     var klaroConfig = {
-        privacyPolicy: "/Keräämme tietoja vain google analyticsiä varten, kaikki laskut tapahtuvat selaimessa, tietoja ei tallenneta", // VAIHDA OMAAN TIETOSUOJASIVUUSI
+        privacyPolicy: "/Keräämme tietoja vain google analyticsiä varten, kaikki laskut tapahtuvat selaimessa, tietoja ei tallenneta",
         translations: {
             fi: {
                 consentModal: {
@@ -27,7 +27,7 @@
                 },
             },
         },
-        apps: [{
+        services: [{
             name: "googleAnalytics",
             title: "Google Analytics",
             purposes: ["analytics"],
@@ -38,7 +38,7 @@
                     window.dataLayer = window.dataLayer || [];
                     function gtag(){dataLayer.push(arguments);}
                     gtag('js', new Date());
-                    gtag('config', 'G-T09C7VFBV9'); // KÄYTÄ OIKEAA GA-TUNNUSTA
+                    gtag('config', 'G-T09C7VFBV9');
                 }
             }
         }],
@@ -628,30 +628,96 @@
         });
     }
 
-  // Määrittele kaikki tarvittavat funktiot ENSIN
-function updateShapeInputs() {
     // Päivitä geometrisyötteet
-}
+    function updateShapeInputs() {
+        const shapeType = document.getElementById('shape-type').value;
+        const shapeInputs = document.getElementById('shape-inputs');
+        shapeInputs.innerHTML = '';
 
-function showCalculator(tyyppi) {
-    // Vaihda aktiivista laskuria
-    console.log("Laskuri:", tyyppi);
-}
+        switch(shapeType) {
+            case 'rectangle':
+                shapeInputs.innerHTML = `
+                    <input type="number" id="length" placeholder="Pituus">
+                    <input type="number" id="width" placeholder="Leveys">
+                `;
+                break;
+            case 'circle':
+                shapeInputs.innerHTML = `
+                    <input type="number" id="radius" placeholder="Säde">
+                `;
+                break;
+            case 'cube':
+                shapeInputs.innerHTML = `
+                    <input type="number" id="side" placeholder="Sivun pituus">
+                `;
+                break;
+            case 'sphere':
+                shapeInputs.innerHTML = `
+                    <input type="number" id="sphere-radius" placeholder="Säde">
+                `;
+                break;
+            case 'cylinder':
+                shapeInputs.innerHTML = `
+                    <input type="number" id="cylinder-radius" placeholder="Säde">
+                    <input type="number" id="cylinder-height" placeholder="Korkeus">
+                `;
+                break;
+        }
+    }
 
-// Suorita kun DOM on valmis
-document.addEventListener('DOMContentLoaded', function() {
-    updateShapeInputs();
-    showCalculator('yhteenlasku'); // Oletusarvoinen laskuri
-});
-        // Näytä evästebanneri automaattisesti
-        setTimeout(() => {
-            if (typeof klaro !== 'undefined') {
-                klaro.show(klaroConfig);
+    // Laske pinta-ala ja tilavuus
+    function calculateAreaVolume() {
+        const shapeType = document.getElementById('shape-type').value;
+        let area = 0, volume = 0;
+        const PI = Math.PI;
+
+        try {
+            switch(shapeType) {
+                case 'rectangle':
+                    const length = parseFloat(document.getElementById('length').value);
+                    const width = parseFloat(document.getElementById('width').value);
+                    area = length * width;
+                    break;
+                case 'circle':
+                    const radius = parseFloat(document.getElementById('radius').value);
+                    area = PI * radius * radius;
+                    break;
+                case 'cube':
+                    const side = parseFloat(document.getElementById('side').value);
+                    area = 6 * side * side;
+                    volume = side * side * side;
+                    break;
+                case 'sphere':
+                    const sphereRadius = parseFloat(document.getElementById('sphere-radius').value);
+                    area = 4 * PI * sphereRadius * sphereRadius;
+                    volume = (4/3) * PI * Math.pow(sphereRadius, 3);
+                    break;
+                case 'cylinder':
+                    const cylinderRadius = parseFloat(document.getElementById('cylinder-radius').value);
+                    const height = parseFloat(document.getElementById('cylinder-height').value);
+                    area = 2 * PI * cylinderRadius * (cylinderRadius + height);
+                    volume = PI * cylinderRadius * cylinderRadius * height;
+                    break;
             }
-        }, 1000);
-    );
 
-    // Laskurifunktiot (samanlaiset kuin aiemmin)
+            let resultText = `Pinta-ala: ${area.toFixed(2)}`;
+            if (volume > 0) {
+                resultText += ` | Tilavuus: ${volume.toFixed(2)}`;
+            }
+            document.getElementById('area-volume-result').textContent = resultText;
+        } catch (e) {
+            document.getElementById('area-volume-result').textContent = "Virhe laskennassa";
+        }
+    }
+
+    // Resetoi geometrialaskuri
+    function resetShapeCalculator() {
+        document.getElementById('shape-type').value = 'rectangle';
+        updateShapeInputs();
+        document.getElementById('area-volume-result').textContent = '-';
+    }
+
+    // Laske yhteenlasku
     function calculateSum() {
         const num1 = parseFloat(document.getElementById("sum1").value);
         const num2 = parseFloat(document.getElementById("sum2").value);
@@ -672,7 +738,405 @@ document.addEventListener('DOMContentLoaded', function() {
         resultElement.textContent = (num1 + num2).toFixed(2);
     }
 
-    // ... (muut laskurifunktiot säilyvät ennallaan)
+    // Generoi kertotaulukko
+    function generateMultiplicationTable() {
+        const number = parseInt(document.getElementById("multiplication-input").value);
+        const tableDiv = document.getElementById("multiplication-table");
+        
+        if (isNaN(number)) {
+            tableDiv.innerHTML = "<p>Syötä luku</p>";
+            return;
+        }
+
+        let html = "";
+        for (let i = 1; i <= 10; i++) {
+            html += `<p>${number} × ${i} = ${number * i}</p>`;
+        }
+        tableDiv.innerHTML = html;
+    }
+
+    // Laske potenssi
+    function calculatePower() {
+        const base = parseFloat(document.getElementById("base").value);
+        const exponent = parseFloat(document.getElementById("exponent").value);
+        const resultElement = document.getElementById("power-result");
+
+        if (isNaN(base) || isNaN(exponent)) {
+            resultElement.textContent = "Syötä molemmat luvut";
+            return;
+        }
+
+        resultElement.textContent = Math.pow(base, exponent).toFixed(2);
+    }
+
+    // Laske juuret
+    function calculateRoots() {
+        const number = parseFloat(document.getElementById("square-root").value);
+        const resultElement = document.getElementById("root-result");
+
+        if (isNaN(number)) {
+            resultElement.textContent = "Syötä luku";
+            return;
+        }
+
+        if (number < 0) {
+            resultElement.textContent = "Negatiivisella luvulla ei ole reaalista neliöjuurta";
+            return;
+        }
+
+        const squareRoot = Math.sqrt(number);
+        const cubeRoot = Math.cbrt(number);
+        resultElement.textContent = `Neliöjuuri: ${squareRoot.toFixed(2)} | Kuutiojuuri: ${cubeRoot.toFixed(2)}`;
+    }
+
+    // Muunna lämpötila
+    function convertTemperature() {
+        const conversionType = document.getElementById("temp-conversion-type").value;
+        const inputTemp = parseFloat(document.getElementById("temp-input").value);
+        const resultElement = document.getElementById("temp-result");
+
+        if (isNaN(inputTemp)) {
+            resultElement.textContent = "Syötä lämpötila";
+            return;
+        }
+
+        let result;
+        switch(conversionType) {
+            case "c-to-f":
+                result = (inputTemp * 9/5) + 32;
+                resultElement.textContent = `${result.toFixed(1)} °F`;
+                break;
+            case "f-to-c":
+                result = (inputTemp - 32) * 5/9;
+                resultElement.textContent = `${result.toFixed(1)} °C`;
+                break;
+            case "c-to-k":
+                result = inputTemp + 273.15;
+                resultElement.textContent = `${result.toFixed(2)} K`;
+                break;
+            case "k-to-c":
+                result = inputTemp - 273.15;
+                resultElement.textContent = `${result.toFixed(2)} °C`;
+                break;
+        }
+    }
+
+    // Peruslaskin
+    function basicCalculator(operator) {
+        const num1 = parseFloat(document.getElementById("basic-num1").value);
+        const num2 = parseFloat(document.getElementById("basic-num2").value);
+        const resultElement = document.getElementById("basic-result");
+
+        if (isNaN(num1) || isNaN(num2)) {
+            resultElement.textContent = "Syötä molemmat luvut";
+            return;
+        }
+
+        let result;
+        switch(operator) {
+            case '+':
+                result = num1 + num2;
+                break;
+            case '-':
+                result = num1 - num2;
+                break;
+            case '*':
+                result = num1 * num2;
+                break;
+            case '/':
+                if (num2 === 0) {
+                    resultElement.textContent = "Nollalla ei voi jakaa";
+                    return;
+                }
+                result = num1 / num2;
+                break;
+        }
+
+        resultElement.textContent = result.toFixed(2);
+    }
+
+    // Laske hypotenuusa
+    function calculateHypotenuse() {
+        const sideA = parseFloat(document.getElementById("side-a").value);
+        const sideB = parseFloat(document.getElementById("side-b").value);
+        const resultElement = document.getElementById("hypotenuse-result");
+
+        if (isNaN(sideA) || isNaN(sideB)) {
+            resultElement.textContent = "Syötä molemmat sivut";
+            return;
+        }
+
+        const hypotenuse = Math.sqrt(Math.pow(sideA, 2) + Math.pow(sideB, 2));
+        resultElement.textContent = hypotenuse.toFixed(2);
+    }
+
+    // Laske prosentti
+    function calculatePercentage() {
+        const percent = parseFloat(document.getElementById("percent-value").value);
+        const base = parseFloat(document.getElementById("percent-base").value);
+        const resultElement = document.getElementById("percent-result");
+
+        if (isNaN(percent) || isNaN(base)) {
+            resultElement.textContent = "Syötä molemmat arvot";
+            return;
+        }
+
+        const result = (percent / 100) * base;
+        resultElement.textContent = `${percent}% luvusta ${base} on ${result.toFixed(2)}`;
+    }
+
+    // Laske keskiarvo
+    function calculateAverage() {
+        const input = document.getElementById("average-input").value;
+        const resultElement = document.getElementById("average-result");
+
+        if (!input.trim()) {
+            resultElement.textContent = "Syötä arvot";
+            return;
+        }
+
+        const numbers = input.split(',').map(num => parseFloat(num.trim())).filter(num => !isNaN(num));
+        
+        if (numbers.length === 0) {
+            resultElement.textContent = "Virheellinen syöte";
+            return;
+        }
+
+        const sum = numbers.reduce((a, b) => a + b, 0);
+        const average = sum / numbers.length;
+        resultElement.textContent = `Keskiarvo: ${average.toFixed(2)} (${numbers.length} arvoa)`;
+    }
+
+    // Laske mediaani
+    function calculateMedian() {
+        const input = document.getElementById("median-input").value;
+        const resultElement = document.getElementById("median-result");
+
+        if (!input.trim()) {
+            resultElement.textContent = "Syötä arvot";
+            return;
+        }
+
+        let numbers = input.split(',').map(num => parseFloat(num.trim())).filter(num => !isNaN(num));
+        
+        if (numbers.length === 0) {
+            resultElement.textContent = "Virheellinen syöte";
+            return;
+        }
+
+        numbers.sort((a, b) => a - b);
+        let median;
+        const middle = Math.floor(numbers.length / 2);
+
+        if (numbers.length % 2 === 0) {
+            median = (numbers[middle - 1] + numbers[middle]) / 2;
+        } else {
+            median = numbers[middle];
+        }
+
+        resultElement.textContent = `Mediaani: ${median.toFixed(2)} (${numbers.length} arvoa)`;
+    }
+
+    // Päivitä ajanmuunnoksen syötekentät
+    function updateTimeInputs() {
+        const conversionType = document.getElementById("time-conversion-type").value;
+        const timeValue = document.getElementById("time-value");
+        const dateInputs = document.getElementById("date-inputs");
+
+        if (conversionType === "date-difference") {
+            timeValue.classList.add("hidden");
+            dateInputs.classList.remove("hidden");
+        } else {
+            timeValue.classList.remove("hidden");
+            dateInputs.classList.add("hidden");
+        }
+    }
+
+    // Muunna aika
+    function convertTime() {
+        const conversionType = document.getElementById("time-conversion-type").value;
+        const resultElement = document.getElementById("time-result");
+
+        try {
+            let result;
+            switch(conversionType) {
+                case "seconds-to-minutes":
+                    const seconds = parseFloat(document.getElementById("time-value").value);
+                    result = seconds / 60;
+                    resultElement.textContent = `${seconds} sekuntia = ${result.toFixed(2)} minuuttia`;
+                    break;
+                case "minutes-to-hours":
+                    const minutes = parseFloat(document.getElementById("time-value").value);
+                    result = minutes / 60;
+                    resultElement.textContent = `${minutes} minuuttia = ${result.toFixed(2)} tuntia`;
+                    break;
+                case "hours-to-days":
+                    const hours = parseFloat(document.getElementById("time-value").value);
+                    result = hours / 24;
+                    resultElement.textContent = `${hours} tuntia = ${result.toFixed(2)} päivää`;
+                    break;
+                case "days-to-years":
+                    const days = parseFloat(document.getElementById("time-value").value);
+                    result = days / 365.25;
+                    resultElement.textContent = `${days} päivää = ${result.toFixed(2)} vuotta`;
+                    break;
+                case "date-difference":
+                    const date1 = new Date(document.getElementById("date1").value);
+                    const date2 = new Date(document.getElementById("date2").value);
+                    
+                    if (isNaN(date1.getTime()) || isNaN(date2.getTime())) {
+                        resultElement.textContent = "Valitse molemmat päivämäärät";
+                        return;
+                    }
+                    
+                    const diffTime = Math.abs(date2 - date1);
+                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+                    resultElement.textContent = `Ero: ${diffDays} päivää`;
+                    break;
+            }
+        } catch (e) {
+            resultElement.textContent = "Virhe laskennassa";
+        }
+    }
+
+    // Resetoi ajanmuunnoksen syötekentät
+    function resetTimeInputs() {
+        document.getElementById("time-value").value = "";
+        document.getElementById("date1").value = "";
+        document.getElementById("date2").value = "";
+        document.getElementById("time-result").textContent = "-";
+        updateTimeInputs();
+    }
+
+    // Laske BMI
+    function calculateBMI() {
+        const height = parseFloat(document.getElementById("height").value);
+        const weight = parseFloat(document.getElementById("weight").value);
+        const resultElement = document.getElementById("bmi-result");
+
+        if (isNaN(height) || isNaN(weight)) {
+            resultElement.textContent = "Syötä molemmat arvot";
+            return;
+        }
+
+        if (height <= 0 || weight <= 0) {
+            resultElement.textContent = "Arvojen tulee olla positiivisia";
+            return;
+        }
+
+        const heightInMeters = height / 100;
+        const bmi = weight / (heightInMeters * heightInMeters);
+        
+        let interpretation;
+        if (bmi < 18.5) {
+            interpretation = "Alipaino";
+        } else if (bmi < 25) {
+            interpretation = "Normaali paino";
+        } else if (bmi < 30) {
+            interpretation = "Ylipaino";
+        } else {
+            interpretation = "Lievä lihavuus tai enemmän";
+        }
+
+        resultElement.textContent = `BMI: ${bmi.toFixed(1)} (${interpretation})`;
+    }
+
+    // Laske prosentuaalinen muutos
+    function calculatePercentageChange() {
+        const oldValue = parseFloat(document.getElementById("old-value").value);
+        const newValue = parseFloat(document.getElementById("new-value").value);
+        const resultElement = document.getElementById("change-result");
+
+        if (isNaN(oldValue) || isNaN(newValue)) {
+            resultElement.textContent = "Syötä molemmat arvot";
+            return;
+        }
+
+        if (oldValue === 0) {
+            resultElement.textContent = "Alkuarvo ei voi olla nolla";
+            return;
+        }
+
+        const change = ((newValue - oldValue) / oldValue) * 100;
+        resultElement.textContent = `Muutos: ${change.toFixed(2)}%`;
+    }
+
+    // Generoi satunnainen väri
+    function generateRandomColor(type) {
+        const letters = '0123456789ABCDEF';
+        let color;
+        
+        if (type === 'hex') {
+            color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            document.getElementById("color-result").textContent = color;
+        } else {
+            const r = Math.floor(Math.random() * 256);
+            const g = Math.floor(Math.random() * 256);
+            const b = Math.floor(Math.random() * 256);
+            color = `rgb(${r}, ${g}, ${b})`;
+            document.getElementById("color-result").textContent = color;
+        }
+        
+        document.getElementById("color-preview").style.backgroundColor = color;
+    }
+
+    // Generoi Fibonaccin lukujono
+    function generateFibonacci() {
+        const count = parseInt(document.getElementById("fibonacci-count").value);
+        const resultElement = document.getElementById("fibonacci-result");
+
+        if (isNaN(count) || count < 1 || count > 50) {
+            resultElement.textContent = "Syötä luku 1-50 väliltä";
+            return;
+        }
+
+        let sequence = [0, 1];
+        for (let i = 2; i < count; i++) {
+            sequence[i] = sequence[i-1] + sequence[i-2];
+        }
+
+        resultElement.textContent = sequence.slice(0, count).join(", ");
+    }
+
+    // Laske korko
+    function calculateInterest() {
+        const principal = parseFloat(document.getElementById("principal").value);
+        const rate = parseFloat(document.getElementById("interest-rate").value);
+        const time = parseFloat(document.getElementById("time-period").value);
+        const resultElement = document.getElementById("interest-result");
+
+        if (isNaN(principal) || isNaN(rate) || isNaN(time)) {
+            resultElement.textContent = "Syötä kaikki arvot";
+            return;
+        }
+
+        if (principal <= 0 || rate <= 0 || time <= 0) {
+            resultElement.textContent = "Arvojen tulee olla positiivisia";
+            return;
+        }
+
+        const interest = (principal * rate * time) / 100;
+        const total = principal + interest;
+        
+        resultElement.textContent = `Korko: ${interest.toFixed(2)} | Yhteensä: ${total.toFixed(2)}`;
+    }
+
+    // Alusta sivun latautuessa
+    document.addEventListener('DOMContentLoaded', function() {
+        updateShapeInputs();
+        updateTimeInputs();
+        showCalculator('yhteenlasku');
+
+        // Näytä evästebanneri automaattisesti
+        setTimeout(() => {
+            if (typeof klaro !== 'undefined') {
+                klaro.show(klaroConfig);
+            }
+        }, 1000);
+    });
 </script>
 </body>
 </html>
