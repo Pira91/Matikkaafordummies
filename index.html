@@ -720,7 +720,7 @@
             "Keskiarvo: " + (sum / values.length).toFixed(2);
     }
 
-    function calculateMedian() {
+function calculateMedian() {
         const input = document.getElementById("median-input").value;
         let values = input.split(',').map(v => parseFloat(v.trim())).filter(v => !isNaN(v));
 
@@ -736,16 +736,6 @@
         document.getElementById("median-result").textContent =
             "Mediaani: " + median.toFixed(2);
     }
-
-        <div id="mediaanin-laskija-laskuri" class="calculator-box hidden">
-            <h2>Mediaanin laskija</h2>
-            <input type="text" id="median-input" placeholder="Syötä arvot pilkulla eroteltuna">
-            <div class="button-group">
-                <button onclick="calculateMedian()">Laske mediaani</button>
-                <button class="reset-btn" onclick="resetInputs('median-input', 'median-result')">⟲</button>
-            </div>
-            <p id="median-result">-</p>
-        </div>
 
         <div id="ajan-muunnin-laskuri" class="calculator-box hidden">
             <h2>Ajan muunnin/laskuri</h2>
