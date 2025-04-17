@@ -732,14 +732,10 @@
 
         values = values.sort((a, b) => a - b);
         const mid = Math.floor(values.length / 2);
-            <input type="number" id="percent-value" placeholder="Prosentti">
-            <input type="number" id="percent-base" placeholder="Alkuarvo">
-            <div class="button-group">
-                <button onclick="calculatePercentage()">Laske prosentti</button>
-                <button class="reset-btn" onclick="resetInputs('percent-value', 'percent-base', 'percent-result')">⟲</button>
-            </div>
-            <p id="percent-result">-</p>
-        </div>
+        const median = values.length % 2 !== 0 ? values[mid] : (values[mid - 1] + values[mid]) / 2;
+        document.getElementById("median-result").textContent =
+            "Mediaani: " + median.toFixed(2);
+    }
 
         <div id="keskiarvon-laskija-laskuri" class="calculator-box hidden">
             <h2>Keskiarvon laskija</h2>
