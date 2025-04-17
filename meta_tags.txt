@@ -1,0 +1,84 @@
+<!-- Yhteenlasku -->
+<title>Yhteenlaskulaskuri – Laske nopeasti summat</title>
+<meta name="description" content="Helppokäyttöinen yhteenlaskulaskuri arjen laskuihin. Syötä luvut ja saat summan heti.">
+<meta name="keywords" content="yhteenlasku, laskuri, matematiikka, summa, peruslaskut, yhteenlaskulaskuri">
+
+<!-- Kertolaskutaulukko -->
+<title>Kertolaskutaulukko – Opettele ja tarkista kertotaulut</title>
+<meta name="description" content="Kätevä kertolaskutaulukko oppimiseen ja harjoitteluun. Näe kaikki kertotaulut yhdellä sivulla.">
+<meta name="keywords" content="kertolasku, kertotaulu, kertotaulukko, laskeminen, oppiminen, kertolaskutaulukko">
+
+<!-- Potenssilaskin -->
+<title>Potenssilaskin – Laske potenssit helposti</title>
+<meta name="description" content="Laske helposti potenssit syöttämällä perusluku ja eksponentti.">
+<meta name="keywords" content="potenssi, potenssilaskin, matematiikka, eksponentti, potenssilaskuri">
+
+<!-- Neliö- ja kuutiojuuri -->
+<title>Neliö- ja kuutiojuurilaskin – Laske juuret vaivattomasti</title>
+<meta name="description" content="Syötä luku ja laske sen neliö- tai kuutiojuuri nopeasti ja tarkasti.">
+<meta name="keywords" content="neliöjuuri, kuutiojuuri, juurilaskin, laskuri, matemaattinen juuri">
+
+<!-- Pinta-ala ja tilavuus -->
+<title>Pinta-ala- ja tilavuuslaskuri – Laske eri muotojen mitat</title>
+<meta name="description" content="Laske helposti eri muotojen pinta-aloja ja tilavuuksia. Valitse muoto ja syötä mitat.">
+<meta name="keywords" content="pinta-ala, tilavuus, laskuri, geometria, mittaus, mittalaskuri">
+
+<!-- Lämpötilamuunnin -->
+<title>Lämpötilamuunnin – Celsius, Kelvin, Fahrenheit</title>
+<meta name="description" content="Muunna lämpötilat helposti Celsius-, Fahrenheit- ja Kelvin-yksiköiden välillä.">
+<meta name="keywords" content="lämpötila, muunnin, kelvin, fahrenheit, celsius, lämpötilamuunnin, lämpölaskuri">
+
+<!-- Peruslaskin -->
+<title>Peruslaskin – Yhteen-, vähennys-, kerto- ja jakolaskut</title>
+<meta name="description" content="Monipuolinen peruslaskin arjen laskuihin. Laske nelilaskut nopeasti.">
+<meta name="keywords" content="laskin, peruslaskin, nelilaskin, yhteenlasku, vähennyslasku, jakolasku, kertolasku">
+
+<!-- Pythagoraan laskuri -->
+<title>Pythagoraan lauseen laskuri – Laske hypotenuusa tai kateetti</title>
+<meta name="description" content="Syötä kaksi sivua ja laske kolmas Pythagoraan lauseella. Toimii kolmioille.">
+<meta name="keywords" content="pythagoras, kolmio, hypotenuusa, pythagoraan lause, laskuri, kateetti">
+
+<!-- Prosenttilaskuri -->
+<title>Prosenttilaskuri – Laske prosentit ja erotukset</title>
+<meta name="description" content="Laske prosenttiosuudet, alennukset ja muutokset nopeasti ja vaivattomasti.">
+<meta name="keywords" content="prosentti, prosenttilaskuri, alennus, muutos, prosenttilasku, laskin">
+
+<!-- Keskiarvon laskija -->
+<title>Keskiarvolaskuri – Laske lukujen keskiarvo</title>
+<meta name="description" content="Syötä lukujoukko ja laske keskiarvo helposti. Soveltuu arvosanoihin ja mittauksiin.">
+<meta name="keywords" content="keskiarvo, keskiarvolaskin, keskiarvolaskuri, arvosanat, laskuri">
+
+<!-- Mediaanin laskija -->
+<title>Mediaanilaskuri – Laske lukujoukon mediaani</title>
+<meta name="description" content="Laske helposti joukon mediaani syöttämällä luvut. Soveltuu tilastolliseen analyysiin.">
+<meta name="keywords" content="mediaani, mediaanilaskin, tilastot, keskisuure, laskuri">
+
+<!-- Ajan muunnin/laskuri -->
+<title>Ajanmuunnin – Muunna minuutit, tunnit, päivät</title>
+<meta name="description" content="Helppo ajanmuunnin: tunnit, minuutit, sekunnit, päivät ja viikot.">
+<meta name="keywords" content="ajan muunnin, aikayksiköt, aika, minuutit, tunnit, päivät, sekunnit, laskuri">
+
+<!-- BMI-laskuri -->
+<title>Painoindeksilaskuri (BMI) – Laske kehon painoindeksi</title>
+<meta name="description" content="Laske kehon painoindeksi syöttämällä pituus ja paino. Terveysmittari BMI:lle.">
+<meta name="keywords" content="bmi, painoindeksi, painoindeksilaskuri, kehon massaindeksi, terveys, laskuri">
+
+<!-- Prosentuaalinen muutos -->
+<title>Prosentuaalisen muutoksen laskuri – Laske kasvut ja laskut</title>
+<meta name="description" content="Laske kuinka paljon arvo on muuttunut prosentteina. Soveltuu hintamuutoksiin ja datan vertailuun.">
+<meta name="keywords" content="prosenttimuutos, muutos laskuri, prosentuaalinen kasvu, prosentuaalinen muutos, vertailu">
+
+<!-- Satunnainen värin generoija -->
+<title>Satunnainen värigeneraattori – Luo satunnaisia värejä</title>
+<meta name="description" content="Luo satunnaisia värejä RGB- tai HEX-muodossa. Inspiraatiota suunnitteluun.">
+<meta name="keywords" content="väri, satunnainen väri, värigeneraattori, väri-inspiraatio, hex, rgb, värityökalu">
+
+<!-- Fibonaccin lukujono -->
+<title>Fibonaccin lukujono – Laske seuraavat luvut</title>
+<meta name="description" content="Luo Fibonaccin lukujono ja tarkastele matemaattista järjestystä helposti.">
+<meta name="keywords" content="fibonacci, lukujono, fibonacci-laskuri, matematiikka, järjestys">
+
+<!-- Korkolaskuri -->
+<title>Korkolaskuri – Laske korkoa pääomalle</title>
+<meta name="description" content="Laske koron määrä annetulla pääomalla, korolla ja ajalla. Soveltuu säästöihin ja sijoituksiin.">
+<meta name="keywords" content="korkolaskuri, korko, korkolasku, pääoma, säästö, sijoitus, talouslaskuri">
