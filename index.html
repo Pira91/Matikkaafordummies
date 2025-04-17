@@ -3,20 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Tervetuloa ikamittarip.fi, jossa löydät kaikki matemaattiset laskurit yhdessä paikassa">
-    <meta name="keywords" content="matemaattiset työkalut, prosenttilaskuri, yksikkömuunnin, satunnaislukugeneraattori, laskurit, yksikkömuuntimet, trigonometria, geometria, trivia, selvitä, selvitä nopeasti, apua opiskeluun, helpotusta arkeen, matikka, math, solving, etsiminen">
-    <meta name="author" content="ikamittarip.fi">
-    <title>Laskureita joka lähtöön!</title>
-    
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'GA_MEASUREMENT_ID');
-    </script>
-
+    <title>Toimiva Laskurisivu</title>
     <style>
         :root {
             --primary-blue: #1a73e8;
@@ -129,116 +116,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .calculator-box h2 {
-            color: var(--primary-blue);
-            border-bottom: 2px solid var(--primary-blue);
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-            font-size: 1.5em;
-        }
-
-        input, select, button {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border-radius: 6px;
-            border: 1px solid #dadce0;
-            font-size: 16px;
-        }
-
-        input:focus, select:focus {
-            outline: 2px solid var(--primary-blue);
-            border-color: transparent;
-        }
-
-        .button-group {
-            display: flex;
-            gap: 10px;
-        }
-
-        .button-group button {
-            flex: 1;
-        }
-
-        button {
-            background-color: var(--primary-blue);
-            color: var(--white);
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: var(--dark-blue);
-        }
-
-        .reset-btn {
-            background-color: var(--error-red);
-            flex: 0.5 !important;
-        }
-
-        .reset-btn:hover {
-            background-color: #d32f2f;
-        }
-
-        p {
-            font-size: 1.2em;
-            font-weight: bold;
-            color: var(--text-dark);
-        }
-
-        #multiplication-table p {
-            margin: 8px 0;
-            color: var(--text-light);
-        }
-
-        #color-preview {
-            width: 50px;
-            height: 50px;
-            border: 1px solid #ccc;
-            margin-top: 10px;
-        }
-
-        footer {
-            background-color: var(--primary-blue);
-            color: var(--white);
-            padding: 20px 0;
-            text-align: center;
-            margin-top: 40px;
-        }
-
-        footer div {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        footer a {
-            color: var(--white);
-            margin: 0 15px;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        @media (max-width: 768px) {
-            .content-wrapper {
-                flex-direction: column;
-                padding: 0 10px;
-            }
-            
-            .calculator-sidebar {
-                width: 100%;
-                margin-bottom: 20px;
-            }
-            
-            .calculator-main {
-                padding: 0 10px;
-            }
-        }
+        /* Lisätyylit tähän */
     </style>
 </head>
 <body>
@@ -254,21 +132,7 @@
         <ul>
             <li><a href="#" onclick="showCalculator('yhteenlasku'); return false;">Yhteenlasku</a></li>
             <li><a href="#" onclick="showCalculator('kertolaskutaulukko'); return false;">Kertolaskutaulukko</a></li>
-            <li><a href="#" onclick="showCalculator('potenssilaskin'); return false;">Potenssilaskin</a></li>
-            <li><a href="#" onclick="showCalculator('neliojuuri-kuutiojuuri'); return false;">Neliö- ja kuutiojuuri</a></li>
-            <li><a href="#" onclick="showCalculator('pinta-ala-tilavuus'); return false;">Pinta-ala ja tilavuus</a></li>
-            <li><a href="#" onclick="showCalculator('lampotilamuunnin'); return false;">Lämpötilamuunnin</a></li>
-            <li><a href="#" onclick="showCalculator('peruslaskin'); return false;">Peruslaskin</a></li>
-            <li><a href="#" onclick="showCalculator('pythagoraan-laskuri'); return false;">Pythagoraan laskuri</a></li>
-            <li><a href="#" onclick="showCalculator('prosenttilaskuri'); return false;">Prosenttilaskuri</a></li>
-            <li><a href="#" onclick="showCalculator('keskiarvon-laskija'); return false;">Keskiarvon laskija</a></li>
-            <li><a href="#" onclick="showCalculator('mediaanin-laskija'); return false;">Mediaanin laskija</a></li>
-            <li><a href="#" onclick="showCalculator('ajan-muunnin'); return false;">Ajan muunnin/laskuri</a></li>
-            <li><a href="#" onclick="showCalculator('bmi-laskuri'); return false;">BMI-laskuri</a></li>
-            <li><a href="#" onclick="showCalculator('prosentuaalinen-muutos'); return false;">Prosentuaalinen muutos</a></li>
-            <li><a href="#" onclick="showCalculator('satunnainen-vari'); return false;">Satunnainen värin generoija</a></li>
-            <li><a href="#" onclick="showCalculator('fibonacci'); return false;">Fibonaccin lukujono</a></li>
-            <li><a href="#" onclick="showCalculator('korkolaskuri'); return false;">Korkolaskuri</a></li>
+            <!-- Lisää muita laskureita tähän -->
         </ul>
     </aside>
 
@@ -297,225 +161,13 @@
                 <div id="multiplication-table"></div>
             </div>
 
-            <!-- Potenssilaskin -->
-            <div id="potenssilaskin" class="calculator-box">
-                <h2>Potenssilaskin</h2>
-                <input type="number" id="base" placeholder="Perusluku">
-                <input type="number" id="exponent" placeholder="Eksponentti">
-                <div class="button-group">
-                    <button onclick="calculatePower()">Laske</button>
-                    <button class="reset-btn" onclick="resetInputs('base', 'exponent', 'power-result')">⟲</button>
-                </div>
-                <p id="power-result">-</p>
-            </div>
-
-            <!-- Neliöjuuri ja kuutiojuuri -->
-            <div id="neliojuuri-kuutiojuuri" class="calculator-box">
-                <h2>Neliöjuuri ja kuutiojuuri</h2>
-                <input type="number" id="square-root" placeholder="Luku">
-                <div class="button-group">
-                    <button onclick="calculateRoots()">Laske juuret</button>
-                    <button class="reset-btn" onclick="resetInputs('square-root', 'root-result')">⟲</button>
-                </div>
-                <p id="root-result">-</p>
-            </div>
-
-            <!-- Pinta-ala ja tilavuus -->
-            <div id="pinta-ala-tilavuus" class="calculator-box">
-                <h2>Pinta-ala ja tilavuus</h2>
-                <select id="shape-type" onchange="updateShapeInputs()">
-                    <option value="rectangle">Suorakulmio</option>
-                    <option value="circle">Ympyrä</option>
-                    <option value="cube">Kuutio</option>
-                    <option value="sphere">Pallo</option>
-                    <option value="cylinder">Lieriö</option>
-                </select>
-                <div id="shape-inputs">
-                    <!-- Input fields will be added here dynamically -->
-                </div>
-                <div class="button-group">
-                    <button onclick="calculateAreaVolume()">Laske</button>
-                    <button class="reset-btn" onclick="resetShapeCalculator()">⟲</button>
-                </div>
-                <p id="area-volume-result">-</p>
-            </div>
-
-            <!-- Lämpötilamuunnin -->
-            <div id="lampotilamuunnin" class="calculator-box">
-                <h2>Lämpötilamuunnin</h2>
-                <select id="temp-conversion-type">
-                    <option value="c-to-f">Celsius → Fahrenheit</option>
-                    <option value="f-to-c">Fahrenheit → Celsius</option>
-                    <option value="c-to-k">Celsius → Kelvin</option>
-                    <option value="k-to-c">Kelvin → Celsius</option>
-                </select>
-                <input type="number" id="temp-input" placeholder="Syötä lämpötila">
-                <div class="button-group">
-                    <button onclick="convertTemperature()">Muunna</button>
-                    <button class="reset-btn" onclick="resetInputs('temp-input', 'temp-result')">⟲</button>
-                </div>
-                <p id="temp-result">-</p>
-            </div>
-
-            <!-- Peruslaskin -->
-            <div id="peruslaskin" class="calculator-box">
-                <h2>Peruslaskin</h2>
-                <input type="number" id="basic-num1" placeholder="Luku 1">
-                <input type="number" id="basic-num2" placeholder="Luku 2">
-                <div class="button-group">
-                    <button onclick="basicCalculator('+')">+</button>
-                    <button onclick="basicCalculator('-')">-</button>
-                    <button onclick="basicCalculator('*')">*</button>
-                    <button onclick="basicCalculator('/')">/</button>
-                </div>
-                <p id="basic-result">-</p>
-            </div>
-
-            <!-- Pythagoraan laskuri -->
-            <div id="pythagoraan-laskuri" class="calculator-box">
-                <h2>Pythagoraan laskuri</h2>
-                <input type="number" id="side-a" placeholder="Sivu A">
-                <input type="number" id="side-b" placeholder="Sivu B">
-                <div class="button-group">
-                    <button onclick="calculateHypotenuse()">Laske hypotenuusa</button>
-                    <button class="reset-btn" onclick="resetInputs('side-a', 'side-b', 'hypotenuse-result')">⟲</button>
-                </div>
-                <p id="hypotenuse-result">-</p>
-            </div>
-
-            <!-- Prosenttilaskuri -->
-            <div id="prosenttilaskuri" class="calculator-box">
-                <h2>Prosenttilaskuri</h2>
-                <input type="number" id="percent-value" placeholder="Prosentti">
-                <input type="number" id="percent-base" placeholder="Alkuarvo">
-                <div class="button-group">
-                    <button onclick="calculatePercentage()">Laske prosentti</button>
-                    <button class="reset-btn" onclick="resetInputs('percent-value', 'percent-base', 'percent-result')">⟲</button>
-                </div>
-                <p id="percent-result">-</p>
-            </div>
-
-            <!-- Keskiarvon laskija -->
-            <div id="keskiarvon-laskija" class="calculator-box">
-                <h2>Keskiarvon laskija</h2>
-                <input type="text" id="average-input" placeholder="Syötä arvot pilkulla eroteltuna">
-                <div class="button-group">
-                    <button onclick="calculateAverage()">Laske keskiarvo</button>
-                    <button class="reset-btn" onclick="resetInputs('average-input', 'average-result')">⟲</button>
-                </div>
-                <p id="average-result">-</p>
-            </div>
-
-            <!-- Mediaanin laskija -->
-            <div id="mediaanin-laskija" class="calculator-box">
-                <h2>Mediaanin laskija</h2>
-                <input type="text" id="median-input" placeholder="Syötä arvot pilkulla eroteltuna">
-                <div class="button-group">
-                    <button onclick="calculateMedian()">Laske mediaani</button>
-                    <button class="reset-btn" onclick="resetInputs('median-input', 'median-result')">⟲</button>
-                </div>
-                <p id="median-result">-</p>
-            </div>
-
-            <!-- Ajan muunnin/laskuri -->
-            <div id="ajan-muunnin" class="calculator-box">
-                <h2>Ajan muunnin/laskuri</h2>
-                <select id="time-conversion-type" onchange="updateTimeInputs()">
-                    <option value="seconds-to-minutes">Sekunnit → Minuutit</option>
-                    <option value="minutes-to-hours">Minuutit → Tunnit</option>
-                    <option value="hours-to-days">Tunnit → Päivät</option>
-                    <option value="days-to-years">Päivät → Vuodet (365.25)</option>
-                    <option value="date-difference">Ero kaksi päivämäärää</option>
-                </select>
-                <div id="time-input-fields">
-                    <input type="number" id="time-value" placeholder="Syötä aika">
-                    <div id="date-inputs" class="hidden">
-                        <input type="date" id="date1">
-                        <input type="date" id="date2">
-                    </div>
-                </div>
-                <div class="button-group">
-                    <button onclick="convertTime()">Muunna</button>
-                    <button class="reset-btn" onclick="resetTimeInputs()">⟲</button>
-                </div>
-                <p id="time-result">-</p>
-            </div>
-
-            <!-- BMI-laskuri -->
-            <div id="bmi-laskuri" class="calculator-box">
-                <h2>BMI-laskuri</h2>
-                <input type="number" id="height" placeholder="Pituus (cm)">
-                <input type="number" id="weight" placeholder="Paino (kg)">
-                <div class="button-group">
-                    <button onclick="calculateBMI()">Laske BMI</button>
-                    <button class="reset-btn" onclick="resetInputs('height', 'weight', 'bmi-result')">⟲</button>
-                </div>
-                <p id="bmi-result">-</p>
-            </div>
-
-            <!-- Prosentuaalinen muutos -->
-            <div id="prosentuaalinen-muutos" class="calculator-box">
-                <h2>Prosentuaalinen muutos</h2>
-                <input type="number" id="old-value" placeholder="Alkuarvo">
-                <input type="number" id="new-value" placeholder="Loppuarvo">
-                <div class="button-group">
-                    <button onclick="calculatePercentageChange()">Laske muutos</button>
-                    <button class="reset-btn" onclick="resetInputs('old-value', 'new-value', 'change-result')">⟲</button>
-                </div>
-                <p id="change-result">-</p>
-            </div>
-
-            <!-- Satunnainen värin generoija -->
-            <div id="satunnainen-vari" class="calculator-box">
-                <h2>Satunnainen värin generoija</h2>
-                <div class="button-group">
-                    <button onclick="generateRandomColor('hex')">HEX</button>
-                    <button onclick="generateRandomColor('rgb')">RGB</button>
-                </div>
-                <p id="color-result">-</p>
-                <div id="color-preview"></div>
-            </div>
-
-            <!-- Fibonaccin lukujono -->
-            <div id="fibonacci" class="calculator-box">
-                <h2>Fibonaccin lukujono</h2>
-                <input type="number" id="fibonacci-count" placeholder="Lukumäärä">
-                <div class="button-group">
-                    <button onclick="generateFibonacci()">Generoi</button>
-                    <button class="reset-btn" onclick="resetInputs('fibonacci-count', 'fibonacci-result')">⟲</button>
-                </div>
-                <p id="fibonacci-result">-</p>
-            </div>
-
-            <!-- Korkolaskuri -->
-            <div id="korkolaskuri" class="calculator-box">
-                <h2>Korkolaskuri</h2>
-                <input type="number" id="principal" placeholder="Pääoma">
-                <input type="number" id="interest-rate" placeholder="Korkoprosentti">
-                <input type="number" id="time-period" placeholder="Aika (vuotta)">
-                <div class="button-group">
-                    <button onclick="calculateInterest()">Laske korko</button>
-                    <button class="reset-btn" onclick="resetInputs('principal', 'interest-rate', 'time-period', 'interest-result')">⟲</button>
-                </div>
-                <p id="interest-result">-</p>
-            </div>
+            <!-- Lisää muita laskureita tähän -->
         </div>
     </main>
 </div>
 
-<footer>
-    <div>
-        <p>© 2025 ikamittarip.fi – Matemaattiset työkalut</p>
-        <p>Arkea helpottavia laskureita!</p>
-        <nav>
-            <a href="tietosuojaseloste.html">Tietosuojaseloste</a>
-            <a href="kayttoehdot.html">Käyttöehdot</a>
-        </nav>
-    </div>
-</footer>
-
 <script>
-    // Näytä valittu laskuri ja piilota muut
+    // Näytä valittu laskuri
     function showCalculator(calculatorId) {
         // Piilota kaikki laskurit
         const calculators = document.querySelectorAll('.calculator-box');
@@ -528,22 +180,6 @@
         if (selectedCalculator) {
             selectedCalculator.classList.add('active');
         }
-    }
-
-    // Resetoi syötekentät
-    function resetInputs(...ids) {
-        ids.forEach(id => {
-            const element = document.getElementById(id);
-            if (element) {
-                if (element.tagName === 'INPUT' || element.tagName === 'SELECT') {
-                    element.value = '';
-                } else if (element.tagName === 'DIV') {
-                    element.innerHTML = '';
-                } else {
-                    element.textContent = '-';
-                }
-            }
-        });
     }
 
     // Yhteenlasku
@@ -584,271 +220,27 @@
         tableDiv.innerHTML = tableHTML;
     }
 
-    // Potenssilaskin
-    function calculatePower() {
-        const base = parseFloat(document.getElementById("base").value);
-        const exponent = parseFloat(document.getElementById("exponent").value);
-        const resultElement = document.getElementById("power-result");
-
-        if (isNaN(base) || isNaN(exponent)) {
-            resultElement.textContent = "Syötä molemmat luvut";
-            return;
-        }
-
-        resultElement.textContent = Math.pow(base, exponent).toFixed(2);
-    }
-
-    // Neliö- ja kuutiojuuri
-    function calculateRoots() {
-        const number = parseFloat(document.getElementById("square-root").value);
-        const resultElement = document.getElementById("root-result");
-
-        if (isNaN(number)) {
-            resultElement.textContent = "Syötä luku";
-            return;
-        }
-
-        const squareRoot = Math.sqrt(number);
-        const cubeRoot = Math.cbrt(number);
-        resultElement.textContent = `Neliöjuuri: ${squareRoot.toFixed(2)}, Kuutiojuuri: ${cubeRoot.toFixed(2)}`;
-    }
-
-    // Pinta-ala ja tilavuus
-    function updateShapeInputs() {
-        const shape = document.getElementById("shape-type").value;
-        let html = '';
-
-        if (shape === "rectangle") {
-            html = `
-                <input type="number" id="length" placeholder="Pituus">
-                <input type="number" id="width" placeholder="Leveys">
-            `;
-        } else if (shape === "circle") {
-            html = `<input type="number" id="radius" placeholder="Säde">`;
-        } else if (shape === "cube") {
-            html = `<input type="number" id="side" placeholder="Sivun pituus">`;
-        } else if (shape === "sphere") {
-            html = `<input type="number" id="sphere-radius" placeholder="Säde">`;
-        } else if (shape === "cylinder") {
-            html = `
-                <input type="number" id="cylinder-radius" placeholder="Säde">
-                <input type="number" id="cylinder-height" placeholder="Korkeus">
-            `;
-        }
-
-        document.getElementById("shape-inputs").innerHTML = html;
-    }
-
-    function calculateAreaVolume() {
-        const shape = document.getElementById("shape-type").value;
-        let result = "-";
-
-        try {
-            if (shape === "rectangle") {
-                const length = parseFloat(document.getElementById("length").value);
-                const width = parseFloat(document.getElementById("width").value);
-                if (isNaN(length)) throw "Syötä pituus";
-                if (isNaN(width)) throw "Syötä leveys";
-                result = `Pinta-ala: ${(length * width).toFixed(2)}`;
+    // Resetoi syötekentät
+    function resetInputs(...ids) {
+        ids.forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                if (element.tagName === 'INPUT' || element.tagName === 'SELECT') {
+                    element.value = '';
+                } else if (element.tagName === 'DIV') {
+                    element.innerHTML = '';
+                } else {
+                    element.textContent = '-';
+                }
             }
-            else if (shape === "circle") {
-                const radius = parseFloat(document.getElementById("radius").value);
-                if (isNaN(radius)) throw "Syötä säde";
-                result = `Pinta-ala: ${(Math.PI * Math.pow(radius, 2)).toFixed(2)}`;
-            }
-            else if (shape === "cube") {
-                const side = parseFloat(document.getElementById("side").value);
-                if (isNaN(side)) throw "Syötä sivun pituus";
-                result = `Tilavuus: ${Math.pow(side, 3).toFixed(2)}`;
-            }
-            else if (shape === "sphere") {
-                const radius = parseFloat(document.getElementById("sphere-radius").value);
-                if (isNaN(radius)) throw "Syötä säde";
-                const volume = (4/3) * Math.PI * Math.pow(radius, 3);
-                const area = 4 * Math.PI * Math.pow(radius, 2);
-                result = `Tilavuus: ${volume.toFixed(2)}, Pinta-ala: ${area.toFixed(2)}`;
-            }
-            else if (shape === "cylinder") {
-                const radius = parseFloat(document.getElementById("cylinder-radius").value);
-                const height = parseFloat(document.getElementById("cylinder-height").value);
-                if (isNaN(radius)) throw "Syötä säde";
-                if (isNaN(height)) throw "Syötä korkeus";
-                const volume = Math.PI * Math.pow(radius, 2) * height;
-                const area = 2 * Math.PI * radius * (radius + height);
-                result = `Tilavuus: ${volume.toFixed(2)}, Pinta-ala: ${area.toFixed(2)}`;
-            }
-        } catch (e) {
-            result = e;
-        }
-
-        document.getElementById("area-volume-result").textContent = result;
+        });
     }
 
-    function resetShapeCalculator() {
-        document.getElementById("shape-inputs").innerHTML = '';
-        document.getElementById("area-volume-result").textContent = '-';
-        document.getElementById("shape-type").selectedIndex = 0;
-    }
+    // Alusta sivu
+    document.addEventListener('DOMContentLoaded', function() {
+        showCalculator('yhteenlasku');
+    });
+</script>
 
-    // Lämpötilamuunnin
-    function convertTemperature() {
-        const type = document.getElementById("temp-conversion-type").value;
-        const temp = parseFloat(document.getElementById("temp-input").value);
-
-        if (isNaN(temp)) {
-            document.getElementById("temp-result").textContent = "Syötä lämpötila";
-            return;
-        }
-
-        let converted;
-        switch (type) {
-            case "c-to-f":
-                converted = (temp * 9/5) + 32;
-                document.getElementById("temp-result").textContent = `${temp}°C = ${converted.toFixed(2)}°F`;
-                break;
-            case "f-to-c":
-                converted = (temp - 32) * 5/9;
-                document.getElementById("temp-result").textContent = `${temp}°F = ${converted.toFixed(2)}°C`;
-                break;
-            case "c-to-k":
-                converted = temp + 273.15;
-                document.getElementById("temp-result").textContent = `${temp}°C = ${converted.toFixed(2)}K`;
-                break;
-            case "k-to-c":
-                converted = temp - 273.15;
-                document.getElementById("temp-result").textContent = `${temp}K = ${converted.toFixed(2)}°C`;
-                break;
-        }
-    }
-
-    // Peruslaskin
-    function basicCalculator(operator) {
-        const num1 = parseFloat(document.getElementById("basic-num1").value);
-        const num2 = parseFloat(document.getElementById("basic-num2").value);
-        let result;
-
-        if (isNaN(num1)) {
-            document.getElementById("basic-result").textContent = "Syötä luku 1";
-            document.getElementById("basic-num1").focus();
-            return;
-        }
-
-        if (isNaN(num2)) {
-            document.getElementById("basic-result").textContent = "Syötä luku 2";
-            document.getElementById("basic-num2").focus();
-            return;
-        }
-
-        switch (operator) {
-            case '+': result = num1 + num2; break;
-            case '-': result = num1 - num2; break;
-            case '*': result = num1 * num2; break;
-            case '/': result = num2 !== 0 ? num1 / num2 : "Ei voi jakaa nollalla"; break;
-            default: result = "Virhe";
-        }
-
-        document.getElementById("basic-result").textContent =
-            typeof result === 'number' ? result.toFixed(2) : result;
-    }
-
-    // Pythagoraan laskuri
-    function calculateHypotenuse() {
-        const sideA = parseFloat(document.getElementById("side-a").value);
-        const sideB = parseFloat(document.getElementById("side-b").value);
-
-        if (isNaN(sideA)) {
-            document.getElementById("hypotenuse-result").textContent = "Syötä sivu A";
-            document.getElementById("side-a").focus();
-            return;
-        }
-
-        if (isNaN(sideB)) {
-            document.getElementById("hypotenuse-result").textContent = "Syötä sivu B";
-            document.getElementById("side-b").focus();
-            return;
-        }
-
-        document.getElementById("hypotenuse-result").textContent =
-            "Hypotenuusa: " + Math.sqrt(sideA*sideA + sideB*sideB).toFixed(2);
-    }
-
-    // Prosenttilaskuri
-    function calculatePercentage() {
-        const percent = parseFloat(document.getElementById("percent-value").value);
-        const base = parseFloat(document.getElementById("percent-base").value);
-
-        if (isNaN(percent)) {
-            document.getElementById("percent-result").textContent = "Syötä prosentti";
-            document.getElementById("percent-value").focus();
-            return;
-        }
-
-        if (isNaN(base)) {
-            document.getElementById("percent-result").textContent = "Syötä alkuarvo";
-            document.getElementById("percent-base").focus();
-            return;
-        }
-
-        document.getElementById("percent-result").textContent =
-            ((percent / 100) * base).toFixed(2);
-    }
-
-    // Keskiarvon laskija
-    function calculateAverage() {
-        const input = document.getElementById("average-input").value;
-        const values = input.split(',').map(v => parseFloat(v.trim())).filter(v => !isNaN(v));
-
-        if (values.length === 0) {
-            document.getElementById("average-result").textContent = "Virheellinen syöte";
-            document.getElementById("average-input").focus();
-            return;
-        }
-
-        const sum = values.reduce((a, b) => a + b, 0);
-        document.getElementById("average-result").textContent =
-            "Keskiarvo: " + (sum / values.length).toFixed(2);
-    }
-
-    // Mediaanin laskija
-    function calculateMedian() {
-        const input = document.getElementById("median-input").value;
-        let values = input.split(',').map(v => parseFloat(v.trim())).filter(v => !isNaN(v));
-
-        if (values.length === 0) {
-            document.getElementById("median-result").textContent = "Virheellinen syöte";
-            document.getElementById("median-input").focus();
-            return;
-        }
-
-        values = values.sort((a, b) => a - b);
-        const mid = Math.floor(values.length / 2);
-        const median = values.length % 2 !== 0 ? values[mid] : (values[mid - 1] + values[mid]) / 2;
-        document.getElementById("median-result").textContent =
-            "Mediaani: " + median.toFixed(2);
-    }
-
-    // Ajan muunnin/laskuri
-    function updateTimeInputs() {
-        const type = document.getElementById("time-conversion-type").value;
-        const timeValueInput = document.getElementById("time-value");
-        const dateInputsDiv = document.getElementById("date-inputs");
-
-        if (type === "date-difference") {
-            timeValueInput.classList.add("hidden");
-            dateInputsDiv.classList.remove("hidden");
-        } else {
-            timeValueInput.classList.remove("hidden");
-            dateInputsDiv.classList.add("hidden");
-        }
-        resetTimeInputs();
-    }
-
-    function resetTimeInputs() {
-        document.getElementById("time-value").value = '';
-        document.getElementById("date1").value = '';
-        document.getElementById("date2").value = '';
-        document.getElementById("time-result").textContent = '-';
-    }
-
-    function convertTime() {
-        const type = document.getElementById("time-conversion-type").
+</body>
+</html>
