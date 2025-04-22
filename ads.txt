@@ -1,4 +1,1 @@
-<!DOCTYPE html>
-<script>
-  window.location.href = "https://srv.adstxtmanager.com/74450/ikamittarip.fi";
-</script>
+google.com, pub-8873458151429627, DIRECT, f08c47fec0942fa0
