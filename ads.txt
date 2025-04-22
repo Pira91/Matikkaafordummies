@@ -1,5 +1,4 @@
-server {
-   location ~ /ads.txt {
-       return 301 https://srv.adstxtmanager.com/19390/ikamittarip.fi;
-   }
-}
+<?php
+header('Location: https://srv.adstxtmanager.com/19390/ikamittarip.fi');
+exit;
+?>
