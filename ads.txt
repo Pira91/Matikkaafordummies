@@ -1,1 +1,5 @@
-Redirect 301 /ads.txt https://srv.adstxtmanager.com/19390/ikamittarip.fi
+server {
+   location ~ /ads.txt {
+       return 301 https://srv.adstxtmanager.com/19390/ikamittarip.fi;
+   }
+}
