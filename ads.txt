@@ -1,4 +1,1 @@
-<?php
-header('Location: https://srv.adstxtmanager.com/19390/[YOUR_DOMAIN].com');
-exit;
-?>
+Redirect 301 /ads.txt https://srv.adstxtmanager.com/19390/ikamittarip.fi
