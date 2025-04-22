@@ -1,0 +1,25 @@
+name: Update ads.txt from Exoticc API
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Päivittää kerran päivässä keskiyöllä UTC-aikaa
+  workflow_dispatch:     # Mahdollistaa manuaalisen ajamisen
+
+jobs:
+  update_ads:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Fetch ads.txt from Exoticc API
+        run: |
+          curl -s -H "Authorization: Bearer 1ee6a10bb6ffab7065459d2ad4005c15" \
+            "https://srv.adstxtmanager.com/19390/ikamittarip.fi" -o ./ads.txt
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions@users.noreply.github.com"
+          git add ads.txt
+          git commit -m "Auto-update ads.txt [$(date +'%Y-%m-%d %H:%M')]"
+          git push
